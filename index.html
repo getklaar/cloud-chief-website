@@ -817,7 +817,7 @@
     <li><a href="#releases">Releases</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#press">Press</a></li>
-    <li><a href="#merch" class="nav-shop">Shop Merch</a></li>
+    <li><a href="https://cloudchiefstore.myshopify.com" target="_blank" class="nav-shop">Shop Merch</a></li>
   </ul>
   <div class="hamburger" onclick="openMenu()">
     <span></span><span></span><span></span>
@@ -833,7 +833,7 @@
   <a href="#releases" class="mmenu-link" onclick="closeMenu()">Releases</a>
   <a href="#about"    class="mmenu-link" onclick="closeMenu()">About</a>
   <a href="#press"    class="mmenu-link" onclick="closeMenu()">Press</a>
-  <a href="#merch"    class="mmenu-link accent" onclick="closeMenu()">Shop Merch</a>
+  <a href="https://cloudchiefstore.myshopify.com" target="_blank" class="mmenu-link accent" onclick="closeMenu()">Shop Merch</a>
 </div>
 
 <!-- ======================================================
@@ -1361,7 +1361,7 @@
       const price = p.price ? '€ ' + (p.price / 100).toFixed(2).replace('.',',') : '';
       const url   = STORE + '/products/' + p.handle;
       const name  = p.title.replace(/^Cloud Chief[\s\-–]+/i, '');
-      return `<a href="${url}" target="_blank" class="merch-card reveal ${delays[i]||''}">
+      return `<a href="${url}" target="_blank" class="merch-card">
         <div class="merch-img">${img ? `<img src="${img}" alt="${p.title}" loading="lazy">` : ''}</div>
         <div class="merch-info">
           <div class="merch-name">${name}</div>
