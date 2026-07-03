@@ -1217,53 +1217,20 @@
 
     <!-- EPK Photo Gallery -->
     <div class="epk-gallery">
-      <div class="epk-photo reveal"><img src="assets/epk-03.png" alt="Cloud Chief EPK Photo 3" onerror="this.parentElement.style.display='none'"></div>
-      <div class="epk-photo reveal d3"><img src="assets/epk-04.png" alt="Cloud Chief EPK Photo 4" onerror="this.parentElement.style.display='none'"></div>
-      <div class="epk-photo reveal"><img src="assets/epk-05.png" alt="Cloud Chief EPK Photo 5" onerror="this.parentElement.style.display='none'"></div>
-      <div class="epk-photo reveal d1"><img src="assets/epk-06.png" alt="Cloud Chief EPK Photo 6" onerror="this.parentElement.style.display='none'"></div>
-      <div class="epk-photo reveal d2"><img src="assets/epk-07.png" alt="Cloud Chief EPK Photo 7" onerror="this.parentElement.style.display='none'"></div>
-      <div class="epk-photo reveal d3"><img src="assets/epk-08.png" alt="Cloud Chief EPK Photo 8" onerror="this.parentElement.style.display='none'"></div>
-      <div class="epk-photo reveal"><img src="assets/epk-09.png" alt="Cloud Chief EPK Photo 9" onerror="this.parentElement.style.display='none'"></div>
-      <div class="epk-photo reveal d1"><img src="assets/epk-10.png" alt="Cloud Chief EPK Photo 10" onerror="this.parentElement.style.display='none'"></div>
-      <div class="epk-photo reveal d2"><img src="assets/epk-11.png" alt="Cloud Chief EPK Photo 11" onerror="this.parentElement.style.display='none'"></div>
-      <div class="epk-photo reveal d3"><img src="assets/epk-12.png" alt="Cloud Chief EPK Photo 12" onerror="this.parentElement.style.display='none'"></div>
+      <div class="epk-photo reveal" onclick="openLightbox('assets/epk-03.png')" onerror="this.style.display='none'" style="cursor:pointer;"><img src="assets/epk-03.png" alt="Cloud Chief Press Photo" onerror="this.parentElement.style.display='none'"></div>
+      <div class="epk-photo reveal d3" onclick="openLightbox('assets/epk-04.png')" style="cursor:pointer;"><img src="assets/epk-04.png" alt="Cloud Chief Press Photo" onerror="this.parentElement.style.display='none'"></div>
+      <div class="epk-photo reveal" onclick="openLightbox('assets/epk-05.png')" style="cursor:pointer;"><img src="assets/epk-05.png" alt="Cloud Chief Press Photo" onerror="this.parentElement.style.display='none'"></div>
+      <div class="epk-photo reveal d1" onclick="openLightbox('assets/epk-06.png')" style="cursor:pointer;"><img src="assets/epk-06.png" alt="Cloud Chief Press Photo" onerror="this.parentElement.style.display='none'"></div>
+      <div class="epk-photo reveal d2" onclick="openLightbox('assets/epk-07.png')" style="cursor:pointer;"><img src="assets/epk-07.png" alt="Cloud Chief Press Photo" onerror="this.parentElement.style.display='none'"></div>
+      <div class="epk-photo reveal d3" onclick="openLightbox('assets/epk-08.png')" style="cursor:pointer;"><img src="assets/epk-08.png" alt="Cloud Chief Press Photo" onerror="this.parentElement.style.display='none'"></div>
+      <div class="epk-photo reveal" onclick="openLightbox('assets/epk-09.png')" style="cursor:pointer;"><img src="assets/epk-09.png" alt="Cloud Chief Press Photo" onerror="this.parentElement.style.display='none'"></div>
+      <div class="epk-photo reveal d1" onclick="openLightbox('assets/epk-10.png')" style="cursor:pointer;"><img src="assets/epk-10.png" alt="Cloud Chief Press Photo" onerror="this.parentElement.style.display='none'"></div>
+      <div class="epk-photo reveal d2" onclick="openLightbox('assets/epk-11.png')" style="cursor:pointer;"><img src="assets/epk-11.png" alt="Cloud Chief Press Photo" onerror="this.parentElement.style.display='none'"></div>
+      <div class="epk-photo reveal d3" onclick="openLightbox('assets/epk-12.png')" style="cursor:pointer;"><img src="assets/epk-12.png" alt="Cloud Chief Press Photo" onerror="this.parentElement.style.display='none'"></div>
     </div>
 
-    <!-- Downloads -->
-    <div class="epk-downloads reveal" style="margin-top:2.5rem;">
-      <a href="assets/epk-portrait.png" download class="dl-item">
-        <span class="dl-icon">📷</span>
-        <div>
-          <div class="dl-title">Press Photo — High Res</div>
-          <div class="dl-sub">PNG · 3150×3150 · For editorial use</div>
-        </div>
-        <span class="dl-arrow">↓</span>
-      </a>
-      <a href="assets/slowburn-theory-cover.jpg" download class="dl-item">
-        <span class="dl-icon">🎵</span>
-        <div>
-          <div class="dl-title">Artwork — Slow-Burn Theory</div>
-          <div class="dl-sub">JPG · 2048×2048 · High resolution</div>
-        </div>
-        <span class="dl-arrow">↓</span>
-      </a>
-      <a href="https://cloudchiefworld.com/#press" target="_blank" class="dl-item">
-        <span class="dl-icon">📄</span>
-        <div>
-          <div class="dl-title">Full EPK — Online</div>
-          <div class="dl-sub">Bio · Photos · Contacts</div>
-        </div>
-        <span class="dl-arrow">→</span>
-      </a>
-      <div class="dl-item" style="opacity:.55;cursor:default;">
-        <span class="dl-icon">🎧</span>
-        <div>
-          <div class="dl-title">Promo Tracks (WAV)</div>
-          <div class="dl-sub">Available on request — email us</div>
-        </div>
-        <span class="dl-arrow" style="color:var(--muted);">→</span>
-      </div>
-    </div>
+    <!-- Lightbox hint -->
+    <p style="text-align:center;color:var(--muted);font-size:.8rem;margin-top:1rem;letter-spacing:.08em;">KLIK OP EEN FOTO OM TE BEKIJKEN &amp; TE DOWNLOADEN</p>
   </div>
 </section>
 
@@ -1378,6 +1345,48 @@
   document.querySelectorAll('.merch-card, [href*="shopify"]').forEach(el => {
     el.addEventListener('click', () => px('ViewContent', { content_type: 'product' }));
   });
+</script>
+
+<!-- ── LIGHTBOX ─────────────────────────────────────────────────────── -->
+<div id="lightbox" onclick="closeLightbox(event)" style="
+  display:none;position:fixed;inset:0;z-index:9999;
+  background:rgba(0,0,0,.92);backdrop-filter:blur(6px);
+  align-items:center;justify-content:center;flex-direction:column;gap:1.2rem;">
+  <button onclick="closeLightbox()" style="
+    position:absolute;top:1.2rem;right:1.4rem;
+    background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;
+    line-height:1;opacity:.7;">✕</button>
+  <img id="lb-img" src="" alt="Cloud Chief Press Photo" style="
+    max-width:90vw;max-height:80vh;object-fit:contain;border-radius:4px;
+    box-shadow:0 8px 60px rgba(0,0,0,.8);">
+  <a id="lb-dl" href="" download style="
+    display:inline-flex;align-items:center;gap:.5rem;
+    background:#e8611a;color:#fff;font-family:inherit;font-size:.8rem;
+    font-weight:700;letter-spacing:.1em;text-decoration:none;
+    padding:.65rem 1.6rem;border-radius:3px;">
+    ↓ &nbsp;DOWNLOAD HIGH RES
+  </a>
+</div>
+<style>
+  #lightbox { display:none; }
+  #lightbox.open { display:flex; }
+  .epk-photo { transition: opacity .2s, transform .2s; }
+  .epk-photo:hover { opacity:.85; transform:scale(1.02); }
+</style>
+<script>
+  function openLightbox(src) {
+    const lb = document.getElementById('lightbox');
+    document.getElementById('lb-img').src = src;
+    document.getElementById('lb-dl').href = src;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox(e) {
+    if (e && e.target !== document.getElementById('lightbox') && e.target.id !== 'lightbox') return;
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') { document.getElementById('lightbox').classList.remove('open'); document.body.style.overflow = ''; }});
 </script>
 
 </body>
