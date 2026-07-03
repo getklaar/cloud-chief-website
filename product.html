@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cloud Chief Premium Basic Tee — Cloud Chief Merch</title>
+  <meta name="description" content="Cloud Chief Premium Basic Tee. Embroidered logo on chest and sleeve. Unisex fit. Worldwide shipping.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,400;1,400;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #E8601A;
+      --black:  #080808;
+      --dark:   #111111;
+      --card:   #161616;
+      --border: rgba(255,255,255,.08);
+      --white:  #F0EAE0;
+      --cream:  #F5EFE6;
+      --muted:  #7a7166;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* Grain */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: .03;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(8,8,8,.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-brand {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: .1em;
+    }
+    .nav-brand span { color: var(--orange); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .nav-links a {
+      font-size: .78rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    .nav-secure {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: .7rem;
+      color: var(--muted);
+      letter-spacing: .06em;
+    }
+    .nav-secure::before {
+      content: '🔒';
+      font-size: .75rem;
+    }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+    /* BREADCRUMB */
+    .breadcrumb {
+      padding: 1.5rem 0 .5rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .75rem;
+      color: var(--muted);
+      letter-spacing: .04em;
+    }
+    .breadcrumb a { color: var(--muted); transition: color .2s; }
+    .breadcrumb a:hover { color: var(--orange); }
+    .breadcrumb span { color: var(--white); }
+
+    /* MAIN GRID */
+    .product-grid {
+      display: grid;
+      grid-template-columns: 1fr 480px;
+      gap: 4rem;
+      padding: 2rem 0 5rem;
+      align-items: start;
+    }
+
+    /* GALLERY */
+    .gallery { position: sticky; top: 80px; }
+
+    .main-img {
+      position: relative;
+      aspect-ratio: 3/4;
+      background: #1a1a1a;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .main-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      transition: opacity .2s;
+    }
+
+    .gallery-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(8,8,8,.7);
+      border: 1px solid var(--border);
+      color: var(--white);
+      width: 36px;
+      height: 36px;
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: background .2s;
+      user-select: none;
+    }
+    .gallery-arrow:hover { background: rgba(232,96,26,.8); border-color: var(--orange); }
+    .gallery-arrow.prev { left: 10px; }
+    .gallery-arrow.next { right: 10px; }
+
+    .gallery-dots {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 5px;
+    }
+    .gallery-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.25);
+      transition: background .2s;
+    }
+    .gallery-dot.active { background: var(--orange); }
+
+    .drop-badge {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: var(--orange);
+      color: #fff;
+      font-size: .65rem;
+      font-weight: 500;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 2px;
+    }
+
+    .thumbs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .thumb {
+      aspect-ratio: 1;
+      background: #1a1a1a;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      cursor: pointer;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color .2s;
+    }
+    .thumb.active { border-color: var(--orange); }
+    .thumb:hover { border-color: rgba(255,255,255,.2); }
+    .thumb img { width: 100%; height: 100%; object-fit: contain; background: #1a1a1a; }
+
+    /* PRODUCT INFO */
+    .product-info { display: flex; flex-direction: column; gap: 1.5rem; }
+
+    .badges {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      font-size: .65rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 2px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+    .badge.hot {
+      border-color: rgba(232,96,26,.4);
+      color: var(--orange);
+      background: rgba(232,96,26,.08);
+    }
+
+    .product-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.8rem;
+      letter-spacing: .04em;
+      line-height: 1;
+    }
+
+    .product-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--muted);
+      margin-top: .25rem;
+      line-height: 1.5;
+    }
+
+    .rating {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .85rem;
+    }
+    .stars { color: var(--orange); letter-spacing: 2px; font-size: .9rem; }
+    .rating-count { color: var(--muted); font-size: .78rem; }
+    .rating-count a { color: var(--orange); border-bottom: 1px solid rgba(232,96,26,.3); }
+
+    .price-block { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 1.25rem 0; }
+
+    .price-main {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.2rem;
+      letter-spacing: .04em;
+      line-height: 1;
+    }
+
+    .price-note {
+      font-size: .75rem;
+      color: var(--muted);
+      margin-top: .4rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .price-note::before { content: ''; display: inline-block; width: 8px; height: 1px; background: var(--muted); }
+
+    /* COLOR SELECTOR */
+    .opt-section { display: flex; flex-direction: column; gap: .6rem; }
+
+    .opt-label {
+      font-size: .7rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .opt-label strong { color: var(--white); font-weight: 400; }
+
+    .color-swatches {
+      display: flex;
+      gap: 8px;
+    }
+
+    .swatch {
+      position: relative;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: transform .2s;
+    }
+    .swatch:hover { transform: scale(1.1); }
+    .swatch.active::after {
+      content: '';
+      position: absolute;
+      inset: -5px;
+      border-radius: 50%;
+      border: 1.5px solid var(--orange);
+    }
+    .swatch.cream-swatch { border: 1px solid rgba(255,255,255,.15); }
+
+    /* SIZE SELECTOR */
+    .size-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .size-guide {
+      font-size: .72rem;
+      color: var(--orange);
+      letter-spacing: .06em;
+      border-bottom: 1px solid rgba(232,96,26,.3);
+      cursor: pointer;
+      transition: opacity .2s;
+    }
+    .size-guide:hover { opacity: .7; }
+
+    .sizes {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .size-btn {
+      min-width: 52px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      font-size: .8rem;
+      letter-spacing: .06em;
+      cursor: pointer;
+      background: transparent;
+      color: var(--white);
+      transition: all .2s;
+      padding: 0 12px;
+    }
+    .size-btn:hover { border-color: rgba(255,255,255,.25); }
+    .size-btn.active { border-color: var(--orange); color: var(--orange); background: rgba(232,96,26,.08); }
+    .size-btn.soldout { opacity: .3; cursor: not-allowed; text-decoration: line-through; }
+
+    .size-note {
+      font-size: .7rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .size-note::before { content: '—'; opacity: .4; }
+
+    /* BUTTONS */
+    .btn-add {
+      width: 100%;
+      height: 54px;
+      background: var(--orange);
+      color: #fff;
+      border: none;
+      border-radius: 2px;
+      font-family: 'Inter', sans-serif;
+      font-size: .78rem;
+      font-weight: 500;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: background .2s;
+    }
+    .btn-add:hover { background: #c44a10; }
+
+    .btn-wish {
+      width: 100%;
+      height: 48px;
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      font-family: 'Inter', sans-serif;
+      font-size: .75rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all .2s;
+    }
+    .btn-wish:hover { border-color: rgba(255,255,255,.2); color: var(--white); }
+
+    /* DELIVERY BOX */
+    .delivery-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 1rem 1.25rem;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .delivery-icon {
+      font-size: 1.1rem;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .delivery-text strong {
+      display: block;
+      font-size: .85rem;
+      font-weight: 500;
+      color: var(--white);
+      margin-bottom: 2px;
+    }
+    .delivery-text span {
+      font-size: .75rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* TRUST GRID */
+    .trust-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .trust-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: .85rem 1rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .trust-icon {
+      font-size: 1rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .trust-text strong {
+      display: block;
+      font-size: .78rem;
+      font-weight: 500;
+      color: var(--white);
+      margin-bottom: 1px;
+    }
+    .trust-text span {
+      font-size: .7rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* PAYMENT METHODS */
+    .pay-methods {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .pay-label {
+      font-size: .68rem;
+      color: var(--muted);
+      letter-spacing: .06em;
+    }
+
+    .pay-chip {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 3px 8px;
+      font-size: .68rem;
+      color: var(--muted);
+      letter-spacing: .04em;
+    }
+
+    .printful-note {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: .68rem;
+      color: var(--muted);
+      opacity: .6;
+      padding-top: .25rem;
+    }
+    .printful-note::before { content: '✦'; color: var(--orange); font-size: .55rem; }
+
+    /* PRODUCT DETAILS ACCORDION */
+    .accordion { border-top: 1px solid var(--border); }
+
+    .accordion-item { border-bottom: 1px solid var(--border); }
+
+    .accordion-header {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: .8rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .accordion-header span:first-child { letter-spacing: .1em; }
+
+    .accordion-arrow {
+      font-size: .8rem;
+      color: var(--muted);
+      transition: transform .25s;
+    }
+    .accordion-item.open .accordion-arrow { transform: rotate(180deg); }
+
+    .accordion-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .3s ease;
+    }
+    .accordion-item.open .accordion-body { max-height: 400px; }
+
+    .accordion-content {
+      padding-bottom: 1.25rem;
+    }
+
+    .spec-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: .5rem 0;
+      border-bottom: 1px solid rgba(255,255,255,.04);
+      font-size: .8rem;
+    }
+    .spec-row:last-child { border: none; }
+    .spec-row span:first-child { color: var(--muted); }
+
+    /* REVIEWS SECTION */
+    .reviews-section { padding: 4rem 0; border-top: 1px solid var(--border); }
+
+    .section-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      letter-spacing: .06em;
+      margin-bottom: 2rem;
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .review-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 1.25rem;
+    }
+
+    .review-stars { color: var(--orange); font-size: .85rem; margin-bottom: .5rem; }
+
+    .review-text {
+      font-size: .82rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: .75rem;
+      font-style: italic;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: .95rem;
+    }
+
+    .review-author {
+      font-size: .7rem;
+      color: rgba(255,255,255,.4);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 0;
+      text-align: center;
+    }
+    footer p {
+      font-size: .72rem;
+      color: var(--muted);
+      letter-spacing: .06em;
+    }
+    footer a { color: var(--orange); }
+
+    /* GOOGLE TRANSLATE */
+    #google_translate_element {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 200;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 4px 8px;
+    }
+
+    /* MOBILE */
+    @media (max-width: 900px) {
+      .product-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .gallery { position: static; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      nav { padding: 0 1rem; }
+      .nav-links { display: none; }
+      .container { padding: 0 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-brand">CLOUD <span>CHIEF</span></a>
+    <div class="nav-links">
+      <a href="index.html#listen">Music</a>
+      <a href="index.html#releases">Releases</a>
+      <a href="product.html" style="color:var(--orange)">Merch</a>
+      <a href="index.html#press">Press</a>
+    </div>
+    <div class="nav-secure">Secure checkout</div>
+  </nav>
+
+  <div class="container">
+
+    <!-- BREADCRUMB -->
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span>›</span>
+      <a href="shop.html">Merch</a>
+      <span>›</span>
+      <span>Cloud Chief Hoodie</span>
+    </div>
+
+    <!-- PRODUCT -->
+    <div class="product-grid">
+
+      <!-- GALLERY -->
+      <div class="gallery">
+        <div class="main-img">
+          <div class="drop-badge">Limited drop</div>
+          <div class="drop-badge">New drop</div>
+          <img id="main-product-img"
+            src="https://files.cdn.printful.com/products/438/11546_1642678249.jpg"
+            alt="Cloud Chief Premium Basic Tee — Black front"
+            style="width:100%;height:100%;object-fit:contain;background:#0f0f0f;">
+          <!-- Prev / Next arrows -->
+          <div class="gallery-arrow prev" onclick="shiftView(-1)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          </div>
+          <div class="gallery-arrow next" onclick="shiftView(1)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+          <!-- Dots -->
+          <div class="gallery-dots">
+            <div class="gallery-dot active" id="dot-0"></div>
+            <div class="gallery-dot" id="dot-1"></div>
+            <div class="gallery-dot" id="dot-2"></div>
+            <div class="gallery-dot" id="dot-3"></div>
+            <div class="gallery-dot" id="dot-4"></div>
+          </div>
+        </div>
+        <div class="thumbs">
+          <div class="thumb active" data-view="0" onclick="goToView(0)">
+            <img id="thumb-0" src="images/mockups/black-lifestyle-a.jpg" alt="Look 1">
+          </div>
+          <div class="thumb" data-view="1" onclick="goToView(1)">
+            <img id="thumb-1" src="images/mockups/black-lifestyle-b.jpg" alt="Look 2">
+          </div>
+          <div class="thumb" data-view="2" onclick="goToView(2)">
+            <img id="thumb-2" src="images/mockups/black-back.png" alt="Back">
+          </div>
+          <div class="thumb" data-view="3" onclick="goToView(3)">
+            <img id="thumb-3" src="images/mockups/black-front-and-back.jpg" alt="Front & Back">
+          </div>
+          <div class="thumb" data-view="4" onclick="goToView(4)">
+            <img id="thumb-4" src="images/mockups/black-right.png" alt="Detail">
+          </div>
+        </div>
+      </div>
+
+      <!-- INFO -->
+      <div class="product-info">
+
+        <div class="badges">
+          <span class="badge hot">New</span>
+          <span class="badge">Embroidered</span>
+          <span class="badge">Unisex fit</span>
+        </div>
+
+        <div>
+          <h1 class="product-title">Cloud Chief<br>Premium Basic</h1>
+          <p class="product-sub">Classic cotton tee, embroidered CC logo on chest &amp; sleeve.<br>5 colours. Made on order.</p>
+        </div>
+
+        <div class="rating">
+          <span class="stars">★★★★★</span>
+          <span style="font-size:.85rem;font-weight:500">4.9</span>
+          <span class="rating-count"><a href="#reviews">24 reviews</a></span>
+        </div>
+
+        <div class="price-block">
+          <div class="price-main">€29,50</div>
+          <div class="price-note">Free shipping on orders over €75 · Worldwide available</div>
+        </div>
+
+        <!-- COLOR -->
+        <div class="opt-section">
+          <div class="opt-label">Color: <strong id="selected-color-label">Black</strong></div>
+          <div class="color-swatches">
+            <div class="swatch active" style="background:#1a1a1a" title="Black" data-color="Black" onclick="setColor('Black',null)"></div>
+            <div class="swatch" style="background:#1B2A4A" title="Navy" data-color="Navy" onclick="setColor('Navy',null)"></div>
+            <div class="swatch" style="background:#3B1C0C" title="Dark Chocolate" data-color="Dark Chocolate" onclick="setColor('Dark Chocolate',null)"></div>
+
+            <div class="swatch cream-swatch" style="background:#E8E4DC" title="White" data-color="White" onclick="setColor('White',null)"></div>
+          </div>
+        </div>
+
+        <!-- SIZE -->
+        <div class="opt-section">
+          <div class="size-row">
+            <div class="opt-label">Size: <strong id="selected-size-label">M</strong></div>
+            <span class="size-guide">Size guide</span>
+          </div>
+          <div class="sizes">
+            <button class="size-btn" data-size="S">S</button>
+            <button class="size-btn active" data-size="M">M</button>
+            <button class="size-btn" data-size="L">L</button>
+            <button class="size-btn" data-size="XL">XL</button>
+            <button class="size-btn" data-size="2XL">2XL</button>
+            <button class="size-btn" data-size="3XL">3XL</button>
+          </div>
+          <div class="size-note">Fits true to size · Unisex</div>
+        </div>
+
+        <!-- CTA -->
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <button class="btn-add" id="add-to-cart-btn" onclick="addToCart()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+            Order now — €29,50
+          </button>
+          <button class="btn-wish">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            Save for later
+          </button>
+        </div>
+
+        <!-- DELIVERY -->
+        <div class="delivery-box">
+          <span class="delivery-icon">🚚</span>
+          <div class="delivery-text">
+            <strong>Estimated delivery: 5–8 business days</strong>
+            <span>Made to order · Shipped from EU facility · Track &amp; trace included</span>
+          </div>
+        </div>
+
+        <!-- TRUST -->
+        <div class="trust-grid">
+          <div class="trust-item">
+            <span class="trust-icon">🔒</span>
+            <div class="trust-text">
+              <strong>Secure payment</strong>
+              <span>iDEAL, Visa, Mastercard, PayPal</span>
+            </div>
+          </div>
+          <div class="trust-item">
+            <span class="trust-icon">↩</span>
+            <div class="trust-text">
+              <strong>30-day returns</strong>
+              <span>Free, no questions asked</span>
+            </div>
+          </div>
+          <div class="trust-item">
+            <span class="trust-icon">✦</span>
+            <div class="trust-text">
+              <strong>Premium quality</strong>
+              <span>Gildan 5000 cotton, embroidered</span>
+            </div>
+          </div>
+          <div class="trust-item">
+            <span class="trust-icon">🌍</span>
+            <div class="trust-text">
+              <strong>Worldwide shipping</strong>
+              <span>EU, US, AU, UK &amp; 100+ countries</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- PAYMENT CHIPS -->
+        <div>
+          <div class="pay-methods">
+            <span class="pay-label">We accept:</span>
+            <span class="pay-chip">iDEAL</span>
+            <span class="pay-chip">Visa</span>
+            <span class="pay-chip">Mastercard</span>
+            <span class="pay-chip">PayPal</span>
+            <span class="pay-chip">Apple Pay</span>
+          </div>
+          <div class="printful-note">Produced &amp; shipped by Printful · Quality guarantee</div>
+        </div>
+
+        <!-- ACCORDION -->
+        <div class="accordion">
+          <div class="accordion-item open">
+            <button class="accordion-header" onclick="toggleAccordion(this)">
+              <span>Product details</span>
+              <span class="accordion-arrow">↓</span>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-content">
+                <div class="spec-row"><span>Material</span><span>80% cotton, 20% polyester</span></div>
+                <div class="spec-row"><span>Weight</span><span>380 gsm heavyweight fleece</span></div>
+                <div class="spec-row"><span>Finish</span><span>Embroidered logo — not printed</span></div>
+                <div class="spec-row"><span>Fit</span><span>Unisex, true to size</span></div>
+                <div class="spec-row"><span>Wash</span><span>30°C, inside out, do not tumble dry</span></div>
+                <div class="spec-row"><span>Packaging</span><span>Biodegradable mailer bag</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-header" onclick="toggleAccordion(this)">
+              <span>Shipping &amp; returns</span>
+              <span class="accordion-arrow">↓</span>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-content">
+                <div class="spec-row"><span>Standard</span><span>5–8 business days</span></div>
+                <div class="spec-row"><span>Express</span><span>2–3 business days (DHL)</span></div>
+                <div class="spec-row"><span>Free shipping</span><span>Orders over €75</span></div>
+                <div class="spec-row"><span>Returns</span><span>30 days, free of charge</span></div>
+                <div class="spec-row"><span>Production</span><span>Each item made to order</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-header" onclick="toggleAccordion(this)">
+              <span>About this drop</span>
+              <span class="accordion-arrow">↓</span>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-content" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.95rem;color:var(--muted);line-height:1.8;padding-top:.25rem">
+                This is a limited run. No restocks, no surplus. The hoodie carries the Cloud Chief logo in embroidered thread — stitched, not printed. Heavy enough to feel like something. Light enough to wear everywhere.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- REVIEWS -->
+    <div class="reviews-section" id="reviews">
+      <div class="section-heading">What people say</div>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Quality is insane for a limited drop. The embroidery is sharp, the fabric heavy. Wore it on stage already."</p>
+          <div class="review-author">DJ Sander V. — Amsterdam</div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Ordered L, fits perfect. Shipping was faster than expected. Feels like a luxury streetwear piece, not merch."</p>
+          <div class="review-author">Marco T. — Rotterdam</div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★☆</div>
+          <p class="review-text">"Solid hoodie. The embroidered logo is the detail that makes it. Wouldn't have guessed it's print-on-demand."</p>
+          <div class="review-author">Lisa K. — Berlin</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p>© 2026 Cloud Chief · <a href="mailto:info@wittmermedia.com">info@wittmermedia.com</a> · <a href="index.html">Back to site</a></p>
+    </div>
+  </footer>
+
+  <!-- GOOGLE TRANSLATE -->
+  <div id="google_translate_element"></div>
+  <script>
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        autoDisplay: true,
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+    }
+  </script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+  <script>
+    // ─── Printful sync_variant_id mapping ───────────────────────────────────
+    const SHOPIFY_STORE = 'https://cloudchiefstore.myshopify.com';
+
+    const VARIANTS = {
+      'Black':          { S: 53908652425554, M: 53908652458322, L: 53908652491090, XL: 53908652523858, '2XL': 53908652556626, '3XL': 53908652589394 },
+      'Navy':           { S: 53908652622162, M: 53908652654930, L: 53908652687698, XL: 53908652720466, '2XL': 53908652753234, '3XL': 53908652786002 },
+      'Dark Chocolate': { S: 53908652818770, M: 53908652851538, L: 53908652884306, XL: 53908652917074, '2XL': 53908652949842, '3XL': 53908652982610 },
+      'White':          { S: 53908654195026, M: 53908654227794, L: 53908654260562, XL: 53908654293330, '2XL': 53908654326098, '3XL': 53908654358866 },
+    };
+
+    // ─── Per-color image sets: [front, back+embroidery, chest detail, sleeve detail]
+    const COLOR_VIEWS = {
+      'Black': [
+        'images/mockups/black-lifestyle-a.jpg',
+        'images/mockups/black-lifestyle-b.jpg',
+        'images/mockups/black-back.png',
+        'images/mockups/black-front-and-back.jpg',
+        'images/mockups/black-right.png',
+      ],
+      'Navy': [
+        'images/mockups/navy-lifestyle-a.jpg',
+        'images/mockups/navy-lifestyle-b.jpg',
+        'images/mockups/navy-back.png',
+        'images/mockups/navy-front-and-back.jpg',
+        'images/mockups/navy-right.png',
+      ],
+      'Dark Chocolate': [
+        'images/mockups/dark-chocolate-lifestyle-a.jpg',
+        'images/mockups/dark-chocolate-lifestyle-b.jpg',
+        'images/mockups/dark-chocolate-back.png',
+        'images/mockups/dark-chocolate-front-and-back.jpg',
+        'images/mockups/dark-chocolate-right.png',
+      ],
+      'White': [
+        'images/mockups/white-lifestyle-a.jpg',
+        'images/mockups/white-lifestyle-b.jpg',
+        'images/mockups/white-back.png',
+        'images/mockups/white-front-and-back.jpg',
+        'images/mockups/white-right.png',
+      ],
+    };
+
+    const VIEW_LABELS = ['Look 1', 'Look 2', 'Back', 'Front & Back', 'Detail'];
+
+    let selectedColor = 'Black';
+    let selectedSize  = 'M';
+    let currentView   = 0;
+
+    function updateMainImage() {
+      const img = document.getElementById('main-product-img');
+      img.style.opacity = '0';
+      setTimeout(() => {
+        img.src = COLOR_VIEWS[selectedColor][currentView];
+        img.alt = `Cloud Chief Premium Basic — ${selectedColor} — ${VIEW_LABELS[currentView]}`;
+        img.style.opacity = '1';
+      }, 100);
+
+      // Update dots
+      document.querySelectorAll('.gallery-dot').forEach((d, i) => {
+        d.classList.toggle('active', i === currentView);
+      });
+
+      // Update thumbnails
+      document.querySelectorAll('.thumb').forEach((t, i) => {
+        t.classList.toggle('active', i === currentView);
+      });
+    }
+
+    function goToView(index) {
+      currentView = index;
+      updateMainImage();
+    }
+
+    function shiftView(dir) {
+      const total = COLOR_VIEWS[selectedColor].length;
+      currentView = (currentView + dir + total) % total;
+      updateMainImage();
+    }
+
+    function setColor(color) {
+      selectedColor = color;
+      currentView = 0;
+      document.getElementById('selected-color-label').textContent = color;
+
+      // Update all thumbnail images to the new color
+      COLOR_VIEWS[color].forEach((src, i) => {
+        const t = document.getElementById('thumb-' + i);
+        if (t) t.src = src;
+      });
+
+      updateMainImage();
+
+      // Sync swatches
+      document.querySelectorAll('.swatch').forEach(s => {
+        s.classList.toggle('active', s.dataset.color === color);
+      });
+    }
+
+    // Size selector
+    document.querySelectorAll('.size-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        selectedSize = btn.dataset.size;
+        document.getElementById('selected-size-label').textContent = selectedSize;
+      });
+    });
+
+    // Keyboard arrow support
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft')  shiftView(-1);
+      if (e.key === 'ArrowRight') shiftView(1);
+    });
+
+    // ─── Add to cart → Shopify checkout ─────────────────────────────────────
+    function addToCart() {
+      const variantId = VARIANTS[selectedColor]?.[selectedSize];
+      if (!variantId) { alert('Please select a color and size.'); return; }
+
+      const btn = document.getElementById('add-to-cart-btn');
+      btn.textContent = 'Redirecting to checkout...';
+      btn.disabled = true;
+
+      window.location.href = `${SHOPIFY_STORE}/cart/${variantId}:1`;
+    }
+
+    function toggleAccordion(btn) {
+      const item = btn.closest('.accordion-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+  </script>
+
+</body>
+</html>

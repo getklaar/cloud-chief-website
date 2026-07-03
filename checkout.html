@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout — Cloud Chief</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital@1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange:  #E8601A;
+      --black:   #080808;
+      --dark:    #111111;
+      --card:    #161616;
+      --card2:   #1c1c1c;
+      --border:  rgba(255,255,255,.07);
+      --white:   #F0EAE0;
+      --cream:   #F5EFE6;
+      --muted:   #7a7166;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: .025;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* HEADER */
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      background: rgba(8,8,8,.95);
+      backdrop-filter: blur(12px);
+      z-index: 50;
+    }
+
+    .hd-brand {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.35rem;
+      letter-spacing: .12em;
+    }
+    .hd-brand em { color: var(--orange); font-style: normal; }
+
+    .hd-back {
+      font-size: .72rem;
+      color: var(--muted);
+      letter-spacing: .08em;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: color .2s;
+    }
+    .hd-back:hover { color: var(--white); }
+
+    .hd-lock {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: .7rem;
+      color: var(--muted);
+      letter-spacing: .06em;
+    }
+
+    /* STEPS */
+    .steps {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .step {
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+
+    .step-inner {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 1rem;
+    }
+
+    .step-num {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .65rem;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+    .step.active .step-num {
+      background: var(--orange);
+      border-color: var(--orange);
+      color: #fff;
+      font-weight: 500;
+    }
+    .step.done .step-num {
+      background: rgba(232,96,26,.15);
+      border-color: rgba(232,96,26,.4);
+      color: var(--orange);
+    }
+
+    .step-label {
+      font-size: .7rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .step.active .step-label { color: var(--white); }
+    .step.done .step-label { color: var(--orange); }
+
+    .step-sep {
+      width: 32px;
+      height: 1px;
+      background: var(--border);
+      flex-shrink: 0;
+    }
+
+    /* LAYOUT */
+    .checkout-layout {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 0;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem 5rem;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    /* FORM PANEL */
+    .form-panel { display: flex; flex-direction: column; gap: 2rem; }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.35rem;
+      letter-spacing: .08em;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+    }
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .form-section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .form-group { display: flex; flex-direction: column; gap: 5px; }
+
+    label {
+      font-size: .68rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    input, select {
+      width: 100%;
+      height: 44px;
+      background: var(--dark);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: .85rem;
+      padding: 0 12px;
+      outline: none;
+      transition: border-color .2s;
+      appearance: none;
+    }
+
+    input:focus, select:focus { border-color: rgba(232,96,26,.5); }
+
+    input::placeholder { color: var(--muted); opacity: .6; font-size: .8rem; }
+
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237a7166' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 36px;
+      cursor: pointer;
+    }
+
+    /* SHIPPING OPTIONS */
+    .ship-opts { display: flex; flex-direction: column; gap: 6px; }
+
+    .ship-opt {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .85rem 1rem;
+      background: var(--dark);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      cursor: pointer;
+      transition: border-color .2s;
+    }
+    .ship-opt.selected { border-color: var(--orange); background: rgba(232,96,26,.05); }
+
+    .ship-opt-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .ship-radio {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 1.5px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: border-color .2s;
+    }
+    .ship-opt.selected .ship-radio { border-color: var(--orange); }
+    .ship-radio-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--orange);
+      opacity: 0;
+      transition: opacity .2s;
+    }
+    .ship-opt.selected .ship-radio-dot { opacity: 1; }
+
+    .ship-name { font-size: .82rem; color: var(--white); }
+    .ship-days { font-size: .72rem; color: var(--muted); margin-top: 1px; }
+
+    .ship-price { font-size: .85rem; font-weight: 500; }
+    .ship-price.free { color: #4caf7d; }
+
+    /* PAYMENT TABS */
+    .pay-tabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 1rem;
+    }
+
+    .pay-tab {
+      flex: 1;
+      height: 42px;
+      background: var(--dark);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: .7rem;
+      letter-spacing: .08em;
+      color: var(--muted);
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: all .2s;
+    }
+    .pay-tab.active { border-color: var(--orange); color: var(--white); background: rgba(232,96,26,.06); }
+    .pay-tab:hover:not(.active) { border-color: rgba(255,255,255,.15); color: var(--white); }
+
+    .pay-tab svg { opacity: .6; }
+    .pay-tab.active svg { opacity: 1; }
+
+    .card-fields { display: flex; flex-direction: column; gap: 10px; }
+
+    .card-icons {
+      display: flex;
+      gap: 6px;
+      margin-bottom: .5rem;
+      align-items: center;
+    }
+
+    .card-icon {
+      height: 24px;
+      padding: 0 7px;
+      background: var(--dark);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      font-size: .65rem;
+      color: var(--muted);
+      letter-spacing: .04em;
+    }
+
+    .ideal-info {
+      background: var(--dark);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 1rem;
+      font-size: .82rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .ideal-info strong { color: var(--white); display: block; margin-bottom: 3px; }
+
+    .hidden { display: none; }
+
+    /* ORDER SUMMARY */
+    .order-panel {
+      position: sticky;
+      top: 80px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .order-header {
+      padding: 1.1rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: .1em;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .order-toggle {
+      font-size: .7rem;
+      font-family: 'Inter', sans-serif;
+      color: var(--orange);
+      cursor: pointer;
+      letter-spacing: .06em;
+      border-bottom: 1px solid rgba(232,96,26,.3);
+    }
+
+    .order-items { padding: 1rem 1.25rem; border-bottom: 1px solid var(--border); }
+
+    .order-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: .6rem 0;
+    }
+
+    .item-img {
+      width: 56px;
+      height: 68px;
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .item-img svg { opacity: .25; }
+    .item-qty {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      width: 18px;
+      height: 18px;
+      background: var(--muted);
+      color: #fff;
+      border-radius: 50%;
+      font-size: .6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .item-info { flex: 1; }
+    .item-name { font-size: .82rem; font-weight: 500; color: var(--white); margin-bottom: 2px; }
+    .item-variant { font-size: .72rem; color: var(--muted); }
+    .item-price { font-size: .88rem; font-weight: 500; color: var(--white); margin-top: 4px; }
+
+    /* DISCOUNT */
+    .discount-row {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 8px;
+    }
+
+    .discount-input {
+      flex: 1;
+      height: 40px;
+      background: var(--dark);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: .82rem;
+      padding: 0 10px;
+      outline: none;
+      transition: border-color .2s;
+    }
+    .discount-input:focus { border-color: rgba(232,96,26,.5); }
+    .discount-input::placeholder { color: var(--muted); opacity: .5; }
+
+    .btn-code {
+      height: 40px;
+      padding: 0 14px;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      color: var(--muted);
+      font-family: 'Inter', sans-serif;
+      font-size: .72rem;
+      letter-spacing: .08em;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .btn-code:hover { border-color: rgba(255,255,255,.2); color: var(--white); }
+
+    /* TOTALS */
+    .order-totals {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: .6rem;
+    }
+
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: .8rem;
+      color: var(--muted);
+    }
+    .total-row.final {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--white);
+      padding-top: .5rem;
+      border-top: 1px solid var(--border);
+      margin-top: .25rem;
+    }
+    .total-row .free { color: #4caf7d; }
+
+    /* PAY BUTTON */
+    .order-cta {
+      padding: 1.1rem 1.25rem;
+    }
+
+    .btn-pay {
+      width: 100%;
+      height: 52px;
+      background: var(--orange);
+      color: #fff;
+      border: none;
+      border-radius: 2px;
+      font-family: 'Inter', sans-serif;
+      font-size: .78rem;
+      font-weight: 500;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background .2s;
+      margin-bottom: .75rem;
+    }
+    .btn-pay:hover { background: #c44a10; }
+
+    .trust-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .trust-chip {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: .65rem;
+      color: var(--muted);
+      letter-spacing: .05em;
+    }
+
+    .policy-line {
+      font-size: .65rem;
+      color: var(--muted);
+      text-align: center;
+      margin-top: .6rem;
+      line-height: 1.7;
+    }
+    .policy-line a { color: var(--orange); border-bottom: 1px solid rgba(232,96,26,.25); }
+
+    /* GOOGLE TRANSLATE */
+    #google_translate_element {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 200;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 4px 8px;
+    }
+
+    /* MOBILE */
+    @media (max-width: 860px) {
+      .checkout-layout { grid-template-columns: 1fr; gap: 2rem; padding: 1.5rem 1rem 4rem; }
+      .order-panel { position: static; }
+      header { padding: 0 1rem; }
+      .steps { overflow-x: auto; justify-content: flex-start; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a href="product.html" class="hd-back">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      Back to product
+    </a>
+    <a href="index.html" class="hd-brand">CLOUD <em>CHIEF</em></a>
+    <div class="hd-lock">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      SSL secured
+    </div>
+  </header>
+
+  <!-- STEPS -->
+  <div class="steps">
+    <div class="step done">
+      <div class="step-inner">
+        <div class="step-num">✓</div>
+        <span class="step-label">Cart</span>
+      </div>
+    </div>
+    <div class="step-sep"></div>
+    <div class="step active">
+      <div class="step-inner">
+        <div class="step-num">2</div>
+        <span class="step-label">Details</span>
+      </div>
+    </div>
+    <div class="step-sep"></div>
+    <div class="step">
+      <div class="step-inner">
+        <div class="step-num">3</div>
+        <span class="step-label">Shipping</span>
+      </div>
+    </div>
+    <div class="step-sep"></div>
+    <div class="step">
+      <div class="step-inner">
+        <div class="step-num">4</div>
+        <span class="step-label">Payment</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- LAYOUT -->
+  <div class="checkout-layout">
+
+    <!-- FORM PANEL -->
+    <div class="form-panel">
+
+      <!-- CONTACT -->
+      <div>
+        <div class="section-title">Contact</div>
+        <div class="form-section">
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" id="email" placeholder="your@email.com">
+          </div>
+          <div class="form-group">
+            <label>
+              <input type="checkbox" style="width:auto;height:auto;margin-right:6px;accent-color:var(--orange)">
+              Keep me updated on new drops
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- SHIPPING ADDRESS -->
+      <div>
+        <div class="section-title">Shipping address</div>
+        <div class="form-section">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fname">First name</label>
+              <input type="text" id="fname" placeholder="Chayen">
+            </div>
+            <div class="form-group">
+              <label for="lname">Last name</label>
+              <input type="text" id="lname" placeholder="Wittmer">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="street">Street + house number</label>
+            <input type="text" id="street" placeholder="Damrak 1">
+          </div>
+          <div class="form-group">
+            <label for="apt">Apartment / addition (optional)</label>
+            <input type="text" id="apt" placeholder="">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="zip">Postal code</label>
+              <input type="text" id="zip" placeholder="1012 LG">
+            </div>
+            <div class="form-group">
+              <label for="city">City</label>
+              <input type="text" id="city" placeholder="Amsterdam">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="country">Country</label>
+            <select id="country">
+              <option value="NL">Netherlands</option>
+              <option value="BE">Belgium</option>
+              <option value="DE">Germany</option>
+              <option value="FR">France</option>
+              <option value="GB">United Kingdom</option>
+              <option value="US">United States</option>
+              <option value="AU">Australia</option>
+              <option value="CA">Canada</option>
+              <option value="OTHER">Other country…</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone (for delivery updates)</label>
+            <input type="tel" id="phone" placeholder="+31 6 12345678">
+          </div>
+        </div>
+      </div>
+
+      <!-- SHIPPING METHOD -->
+      <div>
+        <div class="section-title">Shipping method</div>
+        <div class="ship-opts">
+          <div class="ship-opt selected" onclick="selectShipping(this)">
+            <div class="ship-opt-left">
+              <div class="ship-radio"><div class="ship-radio-dot"></div></div>
+              <div>
+                <div class="ship-name">Standard — PostNL / DPD</div>
+                <div class="ship-days">5–8 business days</div>
+              </div>
+            </div>
+            <span class="ship-price free">Free</span>
+          </div>
+          <div class="ship-opt" onclick="selectShipping(this)">
+            <div class="ship-opt-left">
+              <div class="ship-radio"><div class="ship-radio-dot"></div></div>
+              <div>
+                <div class="ship-name">Express — DHL</div>
+                <div class="ship-days">2–3 business days</div>
+              </div>
+            </div>
+            <span class="ship-price">€7,50</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAYMENT -->
+      <div>
+        <div class="section-title">Payment</div>
+        <div class="form-section">
+          <div class="pay-tabs">
+            <div class="pay-tab active" onclick="switchPay('card', this)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+              Card
+            </div>
+            <div class="pay-tab" onclick="switchPay('ideal', this)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              iDEAL
+            </div>
+            <div class="pay-tab" onclick="switchPay('paypal', this)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 11l5 2m0 0l5-2m-5 2V7"/><rect x="2" y="3" width="20" height="18" rx="2"/></svg>
+              PayPal
+            </div>
+          </div>
+
+          <!-- CARD -->
+          <div id="pay-card" class="card-fields">
+            <div>
+              <div class="card-icons">
+                <span class="card-icon">VISA</span>
+                <span class="card-icon">MC</span>
+                <span class="card-icon">AMEX</span>
+                <span style="font-size:.65rem;color:var(--muted);margin-left:4px">Powered by Stripe</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Card number</label>
+              <input type="text" placeholder="1234 5678 9012 3456" maxlength="19">
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Expiry</label>
+                <input type="text" placeholder="MM / YY" maxlength="7">
+              </div>
+              <div class="form-group">
+                <label>CVV</label>
+                <input type="text" placeholder="···" maxlength="4">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Name on card</label>
+              <input type="text" placeholder="C. Wittmer">
+            </div>
+          </div>
+
+          <!-- iDEAL -->
+          <div id="pay-ideal" class="hidden">
+            <div class="form-group">
+              <label>Select your bank</label>
+              <select>
+                <option value="">Choose bank…</option>
+                <option>ABN AMRO</option>
+                <option>ING</option>
+                <option>Rabobank</option>
+                <option>SNS Bank</option>
+                <option>ASN Bank</option>
+                <option>Bunq</option>
+                <option>Knab</option>
+                <option>Triodos</option>
+              </select>
+            </div>
+            <div class="ideal-info">
+              <strong>iDEAL payment</strong>
+              You'll be redirected to your bank's secure environment to complete payment. Fast, familiar, and no card needed.
+            </div>
+          </div>
+
+          <!-- PAYPAL -->
+          <div id="pay-paypal" class="hidden">
+            <div class="ideal-info">
+              <strong>Pay with PayPal</strong>
+              Click "Pay now" to complete your order through PayPal. You can use your PayPal balance, bank account, or linked card.
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ORDER SUMMARY -->
+    <div class="order-panel">
+
+      <div class="order-header">
+        <span>Your order</span>
+        <span class="order-toggle" onclick="toggleOrder()">Hide</span>
+      </div>
+
+      <div id="order-body">
+
+        <div class="order-items">
+          <div class="order-item">
+            <div class="item-img">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/></svg>
+              <div class="item-qty">1</div>
+            </div>
+            <div class="item-info">
+              <div class="item-name">Cloud Chief Hoodie</div>
+              <div class="item-variant">Black · Size L · Embroidered</div>
+              <div class="item-price">€59,95</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="discount-row">
+          <input class="discount-input" type="text" placeholder="Discount code">
+          <button class="btn-code">Apply</button>
+        </div>
+
+        <div class="order-totals">
+          <div class="total-row">
+            <span>Subtotal</span>
+            <span>€59,95</span>
+          </div>
+          <div class="total-row">
+            <span>Shipping</span>
+            <span class="free">Free</span>
+          </div>
+          <div class="total-row">
+            <span>VAT (21%)</span>
+            <span>€10,40</span>
+          </div>
+          <div class="total-row final">
+            <span>Total</span>
+            <span>€59,95</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="order-cta">
+        <button class="btn-pay" onclick="handlePay()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          Pay now — €59,95
+        </button>
+
+        <div class="trust-row">
+          <span class="trust-chip">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+            SSL
+          </span>
+          <span class="trust-chip">↩ 30-day returns</span>
+          <span class="trust-chip">✦ Made to order</span>
+        </div>
+
+        <div class="policy-line">
+          By paying you agree to our <a href="#">Terms</a> and <a href="#">Privacy policy</a>.<br>
+          Produced &amp; shipped by Printful. Questions? <a href="mailto:info@wittmermedia.com">Contact us</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- GOOGLE TRANSLATE -->
+  <div id="google_translate_element"></div>
+  <script>
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        autoDisplay: true,
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+    }
+  </script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+  <script>
+    // Shipping selector
+    function selectShipping(el) {
+      document.querySelectorAll('.ship-opt').forEach(o => o.classList.remove('selected'));
+      el.classList.add('selected');
+    }
+
+    // Payment tabs
+    function switchPay(type, tabEl) {
+      document.querySelectorAll('.pay-tab').forEach(t => t.classList.remove('active'));
+      tabEl.classList.add('active');
+      document.querySelectorAll('#pay-card, #pay-ideal, #pay-paypal').forEach(el => el.classList.add('hidden'));
+      document.getElementById('pay-' + type).classList.remove('hidden');
+    }
+
+    // Toggle order summary
+    let orderVisible = true;
+    function toggleOrder() {
+      const body = document.getElementById('order-body');
+      const toggle = document.querySelector('.order-toggle');
+      orderVisible = !orderVisible;
+      body.style.display = orderVisible ? '' : 'none';
+      toggle.textContent = orderVisible ? 'Hide' : 'Show';
+    }
+
+    // Pay button
+    function handlePay() {
+      const btn = document.querySelector('.btn-pay');
+      btn.textContent = 'Processing…';
+      btn.style.background = '#555';
+      setTimeout(() => {
+        btn.textContent = '✓ Order placed';
+        btn.style.background = '#2e7d52';
+      }, 2000);
+    }
+
+    // Card number formatting
+    const cardInput = document.querySelector('#pay-card input[placeholder="1234 5678 9012 3456"]');
+    if (cardInput) {
+      cardInput.addEventListener('input', e => {
+        let v = e.target.value.replace(/\D/g, '').substring(0, 16);
+        e.target.value = v.replace(/(.{4})/g, '$1 ').trim();
+      });
+    }
+  </script>
+
+</body>
+</html>

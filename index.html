@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cloud Chief — Official</title>
+  <meta name="description" content="Cloud Chief — Soul. Blues. Groove. Official music, merch & more. From the Netherlands to the world.">
+
+  <!-- Open Graph (Meta Ads & Social Sharing) -->
+  <meta property="og:title" content="Cloud Chief — Official">
+  <meta property="og:description" content="Groove. Soul. Story. Listen now on Spotify, Apple Music & YouTube.">
+  <meta property="og:image" content="assets/slowburn-theory-cover.jpg">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cloudchief.com">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Meta Pixel — replace YOUR_PIXEL_ID_HERE -->
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init','YOUR_PIXEL_ID_HERE');
+    fbq('track','PageView');
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       RESET & VARIABLES
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:       #080808;
+      --dark:        #111111;
+      --surface:     #181818;
+      --border:      #262626;
+      --orange:      #E8601A;
+      --orange-dim:  rgba(232,96,26,0.25);
+      --gold:        #F0A830;
+      --cream:       #F5EFE6;
+      --muted:       #9A8A7A;
+      --white:       #FAFAF8;
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      background: var(--black);
+      color: var(--cream);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* grain overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9000;
+      opacity: 0.4;
+      mix-blend-mode: screen;
+    }
+
+    img { max-width: 100%; display: block; }
+    a   { text-decoration: none; color: inherit; }
+
+    .display {
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 0.04em;
+      line-height: 0.93;
+    }
+    .italic-serif {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+    }
+
+    /* scroll-reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.85s cubic-bezier(.16,1,.3,1), transform 0.85s cubic-bezier(.16,1,.3,1);
+    }
+    .reveal.in { opacity: 1; transform: none; }
+    .d1 { transition-delay: .12s; }
+    .d2 { transition-delay: .24s; }
+    .d3 { transition-delay: .36s; }
+
+    /* shared */
+    .container { max-width: 1260px; margin: 0 auto; }
+    section { padding: 8rem 4rem; }
+
+    .label {
+      font-size: .7rem;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: var(--orange);
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      margin-bottom: 1.25rem;
+    }
+    .label::before { content:''; width:28px; height:1px; background:var(--orange); }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(54px, 8.5vw, 108px);
+      line-height: .93;
+      color: var(--white);
+      margin-bottom: 3rem;
+    }
+
+    /* buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .65rem;
+      padding: .9rem 2.2rem;
+      font-size: .8rem;
+      font-weight: 500;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      transition: all .28s ease;
+      cursor: pointer;
+    }
+    .btn-primary { background: var(--orange); color: #fff; border: 2px solid var(--orange); }
+    .btn-primary:hover { background: #fff; color: var(--black); border-color: #fff; transform: translateY(-2px); }
+    .btn-outline  { background: transparent; color: var(--cream); border: 1.5px solid rgba(245,239,230,.35); }
+    .btn-outline:hover  { border-color: var(--orange); color: var(--orange); transform: translateY(-2px); }
+
+    /* ============================================================
+       INTRO OVERLAY
+    ============================================================ */
+    #intro {
+      position: fixed;
+      inset: 0;
+      background: #000;
+      z-index: 10000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.4rem;
+      transition: opacity .9s ease, visibility .9s ease;
+    }
+    #intro.gone { opacity: 0; visibility: hidden; pointer-events: none; }
+
+    .intro-svg { width: 110px; height: 110px; object-fit: contain; animation: svgIn .9s ease forwards; animation-delay: .3s; opacity: 0; }
+    .intro-cc  {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(64px, 14vw, 130px);
+      letter-spacing: .18em;
+      color: #fff;
+      animation: ccIn 1s cubic-bezier(.16,1,.3,1) forwards;
+      animation-delay: .65s;
+      opacity: 0;
+    }
+    .intro-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(13px, 1.8vw, 17px);
+      letter-spacing: .3em;
+      color: var(--orange);
+      animation: fadeIn .9s ease forwards;
+      animation-delay: 1.2s;
+      opacity: 0;
+    }
+
+    @keyframes svgIn { from { opacity:0; transform:scale(.8); } to { opacity:1; transform:scale(1); } }
+    @keyframes ccIn  { from { opacity:0; letter-spacing:.5em; } to { opacity:1; letter-spacing:.18em; } }
+    @keyframes fadeIn{ from { opacity:0; } to   { opacity:1; } }
+
+    /* ============================================================
+       NAV
+    ============================================================ */
+    nav {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 500;
+      padding: 1.4rem 3.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background .35s, backdrop-filter .35s;
+    }
+    nav.sticky {
+      background: rgba(8,8,8,.93);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.55rem;
+      letter-spacing: .14em;
+    }
+    .nav-logo em { color: var(--orange); font-style: normal; }
+    .nav-links { list-style: none; display: flex; gap: 2.2rem; }
+    .nav-links a {
+      font-size: .72rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color .25s;
+    }
+    .nav-links a:hover { color: var(--orange); }
+    .nav-shop {
+      background: var(--orange);
+      color: #fff !important;
+      padding: .5rem 1.2rem;
+      border-radius: 2px;
+    }
+    .nav-shop:hover { background: #c44a10 !important; color: #fff !important; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { width: 22px; height: 2px; background: var(--cream); border-radius: 1px; }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    #hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('assets/hero-banner-new.png') center center / cover no-repeat,
+                  url('assets/cloud-chief-promo-3.jpg') center 20% / cover no-repeat;
+      animation: zoomBg 10s ease forwards;
+    }
+    @keyframes zoomBg { from { transform:scale(1.08); } to { transform:scale(1); } }
+
+    .hero-grad {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(8,8,8,.05) 0%,
+        rgba(8,8,8,.25) 45%,
+        rgba(8,8,8,.88) 78%,
+        #080808 100%
+      );
+    }
+    .hero-grad-side {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(8,8,8,.75) 0%, transparent 55%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 4rem 6rem;
+      max-width: 870px;
+    }
+    .hero-pre {
+      font-size: .72rem;
+      letter-spacing: .26em;
+      text-transform: uppercase;
+      color: var(--orange);
+      display: flex;
+      align-items: center;
+      gap: .9rem;
+      margin-bottom: 1.4rem;
+    }
+    .hero-pre::before { content:''; width:36px; height:1px; background:var(--orange); }
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(86px, 15vw, 200px);
+      line-height: .88;
+      color: var(--white);
+      letter-spacing: .02em;
+      margin-bottom: 1.25rem;
+    }
+    .hero-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1.15rem, 2.4vw, 1.7rem);
+      color: var(--muted);
+      margin-bottom: 3rem;
+      max-width: 480px;
+    }
+    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .scroll-cue {
+      position: absolute;
+      bottom: 2.2rem;
+      right: 3.5rem;
+      writing-mode: vertical-rl;
+      font-size: .66rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: rgba(154,138,122,.5);
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+    }
+    .scroll-cue::after {
+      content: '';
+      width: 1px;
+      height: 56px;
+      background: rgba(154,138,122,.4);
+      animation: line 2.2s ease infinite;
+    }
+    @keyframes line {
+      0%   { transform:scaleY(0); transform-origin:top;    }
+      50%  { transform:scaleY(1); transform-origin:top;    }
+      50.1%{ transform:scaleY(1); transform-origin:bottom; }
+      100% { transform:scaleY(0); transform-origin:bottom; }
+    }
+
+    /* ============================================================
+       MARQUEE
+    ============================================================ */
+    .marquee-bar { background: var(--orange); padding: 1.1rem 0; overflow: hidden; }
+    .marquee-bar.dark { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .marquee-track {
+      display: flex;
+      gap: 3.5rem;
+      white-space: nowrap;
+      animation: scroll 22s linear infinite;
+    }
+    .marquee-bar.dark .marquee-track { animation-direction: reverse; }
+    .marquee-track span {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.45rem;
+      letter-spacing: .08em;
+      color: rgba(0,0,0,.65);
+      flex-shrink: 0;
+    }
+    .marquee-bar.dark .marquee-track span { color: var(--muted); }
+    .marquee-bar.dark .marquee-track span.accent { color: var(--orange); }
+    @keyframes scroll { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+
+    /* ============================================================
+       LISTEN
+    ============================================================ */
+    #listen { background: var(--dark); border-top: 1px solid var(--border); }
+    .listen-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .listen-desc { color: var(--muted); max-width: 400px; margin-bottom: 2rem; font-size: .95rem; }
+    .platforms { display: flex; flex-direction: column; gap: .85rem; }
+    .platform {
+      display: flex;
+      align-items: center;
+      gap: 1.4rem;
+      padding: 1.15rem 1.6rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      transition: all .28s;
+    }
+    .platform:hover { border-color: var(--orange); background: rgba(232,96,26,.06); transform: translateX(5px); }
+    .plat-icon {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .plat-icon.spt { background: #1DB954; }
+    .plat-icon.apl { background: linear-gradient(135deg,#fc3c44,#fd5f47); }
+    .plat-icon.yt  { background: #FF0000; }
+    .plat-icon.sc  { background: #FF5500; }
+    .plat-name  { font-weight: 500; color: var(--white); font-size: .95rem; }
+    .plat-sub   { font-size: .75rem; color: var(--muted); }
+    .plat-arrow { margin-left: auto; color: var(--muted); transition: all .25s; }
+    .platform:hover .plat-arrow { color: var(--orange); transform: translateX(3px); }
+
+    .embed-wrap { border-radius: 6px; overflow: hidden; }
+    .embed-wrap iframe { width: 100%; display: block; border-radius: 6px; }
+    .embed-note { font-size: .7rem; color: var(--muted); text-align: center; margin-top: .6rem; opacity: .6; }
+
+    /* ============================================================
+       PLAYLIST
+    ============================================================ */
+    #playlist { background: var(--black); position: relative; overflow: hidden; }
+    .pl-bg-img {
+      position: absolute;
+      left: 50%; top: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: .06;
+      filter: grayscale(1) blur(1px);
+      pointer-events: none;
+    }
+    .pl-desc { color: var(--muted); max-width: 500px; margin-bottom: 3rem; font-size: .95rem; }
+    .pl-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.25rem;
+    }
+    .pl-card {
+      display: flex;
+      align-items: center;
+      gap: 1.1rem;
+      padding: 1.3rem 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      transition: all .28s;
+      cursor: pointer;
+    }
+    .pl-card:hover { border-color: var(--orange); transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,.5); }
+    .pl-thumb {
+      width: 64px; height: 64px;
+      border-radius: 6px;
+      background: linear-gradient(135deg, var(--orange), var(--gold));
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .pl-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .pl-thumb-inner {
+      width: 64px; height: 64px;
+      border-radius: 6px;
+      background: linear-gradient(135deg, var(--orange), var(--gold));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+    .pl-title { font-weight: 500; color: var(--white); font-size: .9rem; margin-bottom: .2rem; }
+    .pl-sub   { font-size: .75rem; color: var(--muted); }
+    .pl-cta   { display: flex; align-items: center; gap: 2rem; margin-top: 3rem; flex-wrap: wrap; }
+    .pl-cta p { font-size: .83rem; color: var(--muted); }
+
+    /* ============================================================
+       VIDEO
+    ============================================================ */
+    /* ============================================================
+       PRESS VIDEO + EPK GALLERY
+    ============================================================ */
+    .press-video-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 260px;
+      margin: 0 auto;
+    }
+    .press-video-frame {
+      position: relative;
+      width: 100%;
+      padding-bottom: 177.78%;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #000;
+      box-shadow:
+        0 0 0 1px rgba(232,96,26,.2),
+        0 30px 60px rgba(0,0,0,.75);
+    }
+    .press-video-frame video {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .press-video-label {
+      font-size: .68rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    .epk-gallery {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: .75rem;
+      margin-top: 4rem;
+    }
+    .epk-photo {
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      border-radius: 4px;
+      background: var(--surface);
+      cursor: pointer;
+    }
+    .epk-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform .4s ease;
+      display: block;
+    }
+    .epk-photo:hover img { transform: scale(1.05); }
+
+    .epk-downloads {
+      margin-top: 2rem;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: .75rem;
+    }
+
+    /* ============================================================
+       RELEASES
+    ============================================================ */
+    #releases { background: var(--dark); border-top: 1px solid var(--border); }
+    .rel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 2rem;
+    }
+    .rel-card { cursor: pointer; }
+    .rel-art {
+      aspect-ratio: 1;
+      overflow: hidden;
+      border-radius: 4px;
+      position: relative;
+      margin-bottom: 1rem;
+      background: var(--surface);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .rel-art img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+    .rel-card:hover .rel-art img { transform: scale(1.06); }
+    .rel-overlay {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: transparent;
+      transition: background .28s;
+    }
+    .rel-card:hover .rel-overlay { background: rgba(232,96,26,.28); }
+    .rel-play {
+      width: 48px; height: 48px;
+      border-radius: 50%; background: var(--orange);
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 1.1rem;
+      opacity: 0; transform: scale(.8);
+      transition: all .28s;
+    }
+    .rel-card:hover .rel-play { opacity: 1; transform: scale(1); }
+    .rel-title { font-weight: 500; font-size: .92rem; color: var(--white); margin-bottom: .2rem; }
+    .rel-type  { font-size: .72rem; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; }
+    .rel-more-inner {
+      text-align: center;
+      padding: 2rem;
+    }
+    .rel-more-inner .big { font-family:'Bebas Neue',sans-serif; font-size:2.2rem; color:var(--orange); margin-bottom:.4rem; }
+    .rel-more-inner small { font-size:.78rem; color:var(--muted); }
+
+    /* ============================================================
+       ABOUT
+    ============================================================ */
+    #about { background: var(--black); border-top: 1px solid var(--border); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 7rem;
+      align-items: center;
+    }
+    .about-img-wrap { position: relative; }
+    .about-img-wrap img { border-radius: 4px; filter: grayscale(15%) contrast(1.05); }
+    .about-frame {
+      position: absolute;
+      inset: -14px 14px 14px -14px;
+      border: 1px solid var(--orange);
+      border-radius: 4px;
+      z-index: -1;
+    }
+    .about-text { color: var(--muted); font-size: .96rem; line-height: 1.85; }
+    .about-text p + p { margin-top: 1.2rem; }
+    .about-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--orange);
+      margin-top: 1.4rem;
+    }
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .stat-val {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.4rem;
+      color: var(--orange);
+      line-height: 1;
+      margin-bottom: .2rem;
+    }
+    .stat-lbl { font-size: .72rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
+
+    /* ============================================================
+       MERCH
+    ============================================================ */
+    #merch { background: var(--surface); border-top: 1px solid var(--border); }
+    .merch-intro { max-width: 560px; margin-bottom: 4rem; }
+    .merch-intro p { color: var(--muted); margin-top: .75rem; }
+    .merch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 1.75rem;
+    }
+    .merch-card {
+      background: var(--dark);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: all .28s;
+    }
+    .merch-card:hover { border-color: var(--orange); transform: translateY(-6px); box-shadow: 0 28px 56px rgba(0,0,0,.55); }
+    .merch-img {
+      aspect-ratio: 1;
+      overflow: hidden;
+      background: #161616;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .merch-img img { width:100%; height:100%; object-fit:cover; transition:transform .5s; }
+    .merch-card:hover .merch-img img { transform:scale(1.05); }
+    .merch-info { padding: 1.15rem 1.4rem; }
+    .merch-badge {
+      display: inline-block;
+      background: var(--orange);
+      color: #fff;
+      font-size: .6rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: .18rem .55rem;
+      border-radius: 2px;
+      margin-bottom: .45rem;
+    }
+    .merch-name  { font-weight: 500; color: var(--white); margin-bottom: .25rem; font-size: .95rem; }
+    .merch-price { color: var(--orange); font-weight: 500; font-size: .9rem; }
+    .merch-banner {
+      margin-top: 4rem;
+      padding: 3.5rem 4rem;
+      background: linear-gradient(135deg, rgba(232,96,26,.14) 0%, rgba(240,168,48,.04) 100%);
+      border: 1px solid rgba(232,96,26,.28);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .merch-banner h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      color: var(--white);
+      line-height: 1;
+    }
+    .merch-banner p { color: var(--muted); margin-top: .4rem; font-size: .9rem; }
+
+    /* ============================================================
+       PRESS / EPK
+    ============================================================ */
+    #press { background: var(--dark); border-top: 1px solid var(--border); }
+    .press-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+    }
+    .press-bio h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.75rem;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+    }
+    .press-bio p { color: var(--muted); font-size: .95rem; margin-bottom: 1rem; line-height: 1.8; }
+    .press-contacts { margin-top: 1.75rem; display: flex; flex-direction: column; gap: .75rem; }
+    .press-contacts a { color: var(--orange); font-size: .9rem; transition: opacity .2s; }
+    .press-contacts a:hover { opacity: .7; }
+    .press-contacts strong { color: var(--cream); font-size: .8rem; display: block; margin-bottom: .2rem; letter-spacing: .05em; text-transform: uppercase; }
+
+    .dl-list { display: flex; flex-direction: column; gap: .9rem; }
+    .dl-item {
+      display: flex;
+      align-items: center;
+      gap: 1.4rem;
+      padding: 1.3rem 1.75rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      transition: all .28s;
+    }
+    .dl-item:hover { border-color: var(--orange); background: rgba(232,96,26,.05); }
+    .dl-icon { font-size: 1.8rem; }
+    .dl-title { font-weight: 500; color: var(--white); font-size: .93rem; margin-bottom: .18rem; }
+    .dl-sub   { font-size: .74rem; color: var(--muted); }
+    .dl-arrow { margin-left: auto; color: var(--orange); font-size: 1.1rem; }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer { background: #000; padding: 5rem 4rem 2.5rem; border-top: 1px solid var(--border); }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 5rem;
+      margin-bottom: 4.5rem;
+    }
+    .footer-brand h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.2rem;
+      letter-spacing: .08em;
+      margin-bottom: .9rem;
+    }
+    .footer-brand p { color: var(--muted); font-size: .88rem; max-width: 300px; line-height: 1.75; }
+    .socials { display: flex; gap: .75rem; margin-top: 1.75rem; }
+    .soc-btn {
+      width: 38px; height: 38px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .85rem;
+      transition: all .25s;
+    }
+    .soc-btn:hover { border-color: var(--orange); background: var(--orange); }
+    .soc-wrap { position: relative; display: inline-flex; }
+    .soc-new { position: absolute; top: -6px; right: -6px; background: var(--orange); color: #fff; font-size: .48rem; font-weight: 700; letter-spacing: .06em; padding: 1px 4px; border-radius: 3px; line-height: 1.4; pointer-events: none; }
+    .foot-nav h4 { font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; color: var(--orange); margin-bottom: 1.3rem; }
+    .foot-nav ul { list-style: none; display: flex; flex-direction: column; gap: .7rem; }
+    .foot-nav a { font-size: .88rem; color: var(--muted); transition: color .25s; }
+    .foot-nav a:hover { color: var(--orange); }
+    .footer-bottom {
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: .74rem;
+      color: rgba(154,138,122,.4);
+    }
+
+    /* ============================================================
+       MOBILE MENU
+    ============================================================ */
+    #mmenu {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.97);
+      z-index: 800;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.2rem;
+    }
+    #mmenu.open { display: flex; }
+    .mmenu-close {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      background: none; border: none;
+      color: var(--cream); font-size: 2rem; cursor: pointer;
+    }
+    .mmenu-link {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      letter-spacing: .08em;
+      color: var(--white);
+      transition: color .2s;
+    }
+    .mmenu-link:hover { color: var(--orange); }
+    .mmenu-link.accent { color: var(--orange); }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 1060px) {
+      .listen-grid  { grid-template-columns: 1fr; }
+      .about-grid   { grid-template-columns: 1fr; gap: 4rem; }
+      .press-grid   { grid-template-columns: 1fr; gap: 3rem; }
+      .footer-top   { grid-template-columns: 1fr 1fr; gap: 3rem; }
+      .about-frame  { display: none; }
+      .epk-gallery  { grid-template-columns: repeat(3,1fr); }
+      .epk-downloads { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      section { padding: 5rem 1.5rem; }
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links  { display: none; }
+      .hamburger  { display: flex; }
+      .hero-content { padding: 0 1.5rem 4rem; }
+      .scroll-cue   { display: none; }
+      .footer-top   { grid-template-columns: 1fr; }
+      .footer-top > *:not(:first-child) { display: none; }
+      .about-stats  { grid-template-columns: 1fr 1fr; }
+      .rel-grid     { grid-template-columns: repeat(2,1fr); gap: 1.25rem; }
+      .merch-banner { padding: 2rem; }
+      .epk-gallery  { grid-template-columns: repeat(2,1fr); gap: .5rem; }
+      .epk-downloads { grid-template-columns: 1fr; }
+      footer        { padding: 3rem 1.5rem 2rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ======================================================
+     INTRO OVERLAY
+====================================================== -->
+<div id="intro">
+  <img src="assets/cloud-chief-logo-zwart.png" class="intro-svg" alt="Cloud Chief Logo">
+  <div class="intro-cc">CLOUD CHIEF</div>
+  <div class="intro-sub">Groove &nbsp;·&nbsp; Soul &nbsp;·&nbsp; Story</div>
+</div>
+
+<!-- ======================================================
+     NAV
+====================================================== -->
+<nav id="nav">
+  <a href="#hero" class="nav-logo">CC<em>.</em></a>
+  <ul class="nav-links">
+    <li><a href="#listen">Listen</a></li>
+    <li><a href="#playlist">Playlists</a></li>
+    <li><a href="#releases">Releases</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#press">Press</a></li>
+    <li><a href="#merch" class="nav-shop">Shop Merch</a></li>
+  </ul>
+  <div class="hamburger" onclick="openMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div id="mmenu">
+  <button class="mmenu-close" onclick="closeMenu()">✕</button>
+  <a href="#listen"   class="mmenu-link" onclick="closeMenu()">Listen</a>
+  <a href="#playlist" class="mmenu-link" onclick="closeMenu()">Playlists</a>
+
+  <a href="#releases" class="mmenu-link" onclick="closeMenu()">Releases</a>
+  <a href="#about"    class="mmenu-link" onclick="closeMenu()">About</a>
+  <a href="#press"    class="mmenu-link" onclick="closeMenu()">Press</a>
+  <a href="#merch"    class="mmenu-link accent" onclick="closeMenu()">Shop Merch</a>
+</div>
+
+<!-- ======================================================
+     HERO
+====================================================== -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grad"></div>
+  <div class="hero-grad-side"></div>
+
+  <div class="hero-content">
+    <p class="hero-pre">Official · Netherlands</p>
+    <h1 class="hero-title">CLOUD<br>CHIEF</h1>
+    <p class="hero-tagline">Where blues meets boom bap.<br>Where stories become grooves.</p>
+    <div class="hero-ctas">
+      <a href="#listen"   class="btn btn-primary">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+        Listen Now
+      </a>
+      <a href="#playlist" class="btn btn-outline">Join Playlist</a>
+      <a href="#merch"    class="btn btn-outline">Shop</a>
+    </div>
+  </div>
+
+  <div class="scroll-cue">Scroll</div>
+</section>
+
+<!-- ======================================================
+     MARQUEE 1
+====================================================== -->
+<div class="marquee-bar">
+  <div class="marquee-track">
+    <span>CLOUD CHIEF</span><span>·</span><span>GROOVE</span><span>·</span>
+    <span>SOUL</span><span>·</span><span>BLUES</span><span>·</span>
+    <span>BOOM BAP</span><span>·</span><span>STORY</span><span>·</span>
+    <span>SLOW BURN THEORY</span><span>·</span>
+    <span>CLOUD CHIEF</span><span>·</span><span>GROOVE</span><span>·</span>
+    <span>SOUL</span><span>·</span><span>BLUES</span><span>·</span>
+    <span>BOOM BAP</span><span>·</span><span>STORY</span><span>·</span>
+    <span>SLOW BURN THEORY</span><span>·</span>
+  </div>
+</div>
+
+<!-- ======================================================
+     LISTEN
+====================================================== -->
+<section id="listen">
+  <div class="container">
+    <div class="label reveal">01 — Listen</div>
+    <h2 class="section-title reveal d1">HEAR<br>THE MUSIC</h2>
+
+    <div class="listen-grid">
+      <!-- Platforms -->
+      <div>
+        <p class="listen-desc reveal d2">Available everywhere you stream. Late-night drives, summer BBQs, deep-listening sessions — pick your platform.</p>
+        <div class="platforms">
+
+          <a href="https://open.spotify.com/artist/4BPXWb9bm3v2vtUimqhkec" target="_blank" class="platform reveal d1" data-platform="Spotify">
+            <div class="plat-icon spt">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+            </div>
+            <div>
+              <div class="plat-name">Spotify</div>
+              <div class="plat-sub">Stream · Follow · Playlist</div>
+            </div>
+            <span class="plat-arrow">→</span>
+          </a>
+
+          <a href="https://music.apple.com/nl/artist/cloud-chief/1668639365" target="_blank" class="platform reveal d2" data-platform="Apple Music">
+            <div class="plat-icon apl">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
+            </div>
+            <div>
+              <div class="plat-name">Apple Music</div>
+              <div class="plat-sub">Stream · Listen</div>
+            </div>
+            <span class="plat-arrow">→</span>
+          </a>
+
+          <a href="https://www.youtube.com/@Cloud_Chief" target="_blank" class="platform reveal d3" data-platform="YouTube">
+            <div class="plat-icon yt">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </div>
+            <div>
+              <div class="plat-name">YouTube</div>
+              <div class="plat-sub">Videos · Subscribe</div>
+            </div>
+            <span class="plat-arrow">→</span>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- Spotify Embed -->
+      <div class="embed-wrap reveal d2">
+        <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/album/3W0DIuti2JxLhWQ9ZVmjJ3?utm_source=generator&theme=0&si=5542a4e184c84f95" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================
+     PLAYLIST
+====================================================== -->
+<section id="playlist">
+  <img src="assets/playlist-bg.jpg" class="pl-bg-img" alt="" aria-hidden="true">
+  <div class="container">
+    <div class="label reveal">02 — Playlists</div>
+    <h2 class="section-title reveal d1">JOIN<br>THE LIST</h2>
+    <p class="pl-desc reveal d2">Follow our curated Spotify playlists. New music, collaborations, and handpicked vibes — straight to your library.</p>
+
+    <div class="pl-grid reveal d3">
+
+      <a href="https://open.spotify.com/playlist/2IBibJXEitr55JvBgGp1qz" target="_blank" class="pl-card">
+        <div class="pl-thumb"><img src="assets/chill vibes.jpg" alt="Chill Vibes 2026"></div>
+        <div>
+          <div class="pl-title">Chill Vibes 2026</div>
+          <div class="pl-sub">The official mix · Follow now</div>
+        </div>
+      </a>
+
+      <a href="https://open.spotify.com/playlist/4tTDDo7SypUZ0tKYHf4lbh" target="_blank" class="pl-card">
+        <div class="pl-thumb"><img src="assets/Chillout blues & soul.png" alt="Chillout Blues &amp; Soul"></div>
+        <div>
+          <div class="pl-title">Chill out Blues & Soul</div>
+          <div class="pl-sub">Blues · Soul · Groove · Follow</div>
+        </div>
+      </a>
+
+      <a href="https://open.spotify.com/playlist/0OIaZxNW0P85jq4MVWTnM9" target="_blank" class="pl-card">
+        <div class="pl-thumb"><img src="assets/Car frequencies.png" alt="Car Frequencies"></div>
+        <div>
+          <div class="pl-title">Car Frequencies</div>
+          <div class="pl-sub">Windows down · Follow</div>
+        </div>
+      </a>
+
+      <a href="https://open.spotify.com/playlist/6Xdv95Ye0bwnyXW39mb9ph" target="_blank" class="pl-card">
+        <div class="pl-thumb"><img src="assets/Summer Vibes 2026.png" alt="Summer Vibes 2026"></div>
+        <div>
+          <div class="pl-title">Summer Vibes 2026</div>
+          <div class="pl-sub">BBQ season · Follow</div>
+        </div>
+      </a>
+
+    </div>
+
+    <div class="pl-cta reveal">
+      <a href="https://open.spotify.com/artist/4BPXWb9bm3v2vtUimqhkec" target="_blank" class="btn btn-primary">Follow on Spotify</a>
+      <p>Never miss a release or playlist update</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================
+     RELEASES
+====================================================== -->
+<section id="releases">
+  <div class="container">
+    <div class="label reveal">03 — Releases</div>
+    <h2 class="section-title reveal d1">DISCOGRAPHY</h2>
+
+    <div class="rel-grid">
+
+      <a href="https://open.spotify.com/album/3W0DIuti2JxLhWQ9ZVmjJ3" target="_blank" class="rel-card reveal">
+        <div class="rel-art">
+          <img src="assets/slowburn-theory-cover.jpg" alt="Slow-Burn Theory">
+          <div class="rel-overlay"><div class="rel-play">▶</div></div>
+        </div>
+        <div class="rel-title">Slow-Burn Theory</div>
+        <div class="rel-type">Album</div>
+      </a>
+
+      <a href="https://open.spotify.com/album/0vnove5Nyb76tecv21tl4D" target="_blank" class="rel-card reveal d1">
+        <div class="rel-art">
+          <img src="https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e0205b7396c574d71b5f05db4d0" alt="Whiskey &amp; Cigars" onerror="this.parentElement.style.background='linear-gradient(135deg,#2a1a08,#1a0d04)'">
+          <div class="rel-overlay"><div class="rel-play">▶</div></div>
+        </div>
+        <div class="rel-title">Whiskey &amp; Cigars</div>
+        <div class="rel-type">Album</div>
+      </a>
+
+      <a href="https://open.spotify.com/album/7yZWaFrlRLxIHISrJqmLC1" target="_blank" class="rel-card reveal d2">
+        <div class="rel-art">
+          <img src="https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0225aa73048560a79a14e8d802" alt="Chief Of The Clouds" onerror="this.parentElement.style.background='linear-gradient(135deg,#0d1a2a,#081018)'">
+          <div class="rel-overlay"><div class="rel-play">▶</div></div>
+        </div>
+        <div class="rel-title">Chief Of The Clouds</div>
+        <div class="rel-type">Album</div>
+      </a>
+
+      <a href="https://open.spotify.com/artist/4BPXWb9bm3v2vtUimqhkec" target="_blank" class="rel-card reveal d3">
+        <div class="rel-art">
+          <div class="rel-more-inner">
+            <div class="big">+ MORE</div>
+            <small>Full catalogue on Spotify</small>
+          </div>
+        </div>
+        <div class="rel-title">Full Catalogue</div>
+        <div class="rel-type">On Spotify →</div>
+      </a>
+
+    </div><!-- /.rel-grid -->
+
+  </div>
+</section>
+
+<!-- ======================================================
+     ABOUT / EPK
+====================================================== -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <!-- Text side -->
+      <div>
+        <div class="label reveal">04 — About</div>
+        <h2 class="section-title reveal d1">THE<br>ARTIST</h2>
+        <div class="about-text reveal d2">
+          <p>Cloud Chief is the musical universe of Chayen Wittmer, a Dutch producer and sound builder who constructs music from the ground up. Keys, guitar, his own recorded sounds, layered textures, and whatever the track asks for.</p>
+          <p>Since September 2025, AI has become part of the process, woven into his workflow alongside his own samples and creative direction. The result is a new kind of hybrid, where human instinct and machine speed meet somewhere in the middle and make something that sounds like neither.</p>
+          <p>Live, Cloud Chief blends live instrumentation with a DJ set. Warm, groove-heavy, the kind of set that feels like a late-night bar where nobody wants to leave.</p>
+          <div class="about-quote">"The record I always wanted to hear, but nobody made."</div>
+        </div>
+        <div class="about-stats reveal">
+          <div>
+            <div class="stat-val">2016</div>
+            <div class="stat-lbl">Music since</div>
+          </div>
+          <div>
+            <div class="stat-val">NL</div>
+            <div class="stat-lbl">Netherlands</div>
+          </div>
+          <div>
+            <div class="stat-val">13+</div>
+            <div class="stat-lbl">Releases</div>
+          </div>
+          <div>
+            <div class="stat-val">∞</div>
+            <div class="stat-lbl">Groove per min</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Image side -->
+      <div class="about-img-wrap reveal d2">
+        <img src="assets/epk-portrait.png" onerror="this.src='assets/cloud-chief-promo-3.jpg'" alt="Cloud Chief — Press Photo">
+        <div class="about-frame"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================
+     MARQUEE 2
+====================================================== -->
+<div class="marquee-bar dark">
+  <div class="marquee-track">
+    <span class="accent">WITTMER MEDIA</span><span>·</span>
+    <span>BLUES</span><span>·</span><span>HIP-HOP</span><span>·</span>
+    <span>SOUL</span><span>·</span><span>AMERICANA</span><span>·</span>
+    <span>BOOM BAP</span><span>·</span><span>FILMISCH</span><span>·</span>
+    <span class="accent">WITTMER MEDIA</span><span>·</span>
+    <span>BLUES</span><span>·</span><span>HIP-HOP</span><span>·</span>
+    <span>SOUL</span><span>·</span><span>AMERICANA</span><span>·</span>
+    <span>BOOM BAP</span><span>·</span><span>FILMISCH</span><span>·</span>
+  </div>
+</div>
+
+<!-- ======================================================
+     MERCH
+====================================================== -->
+<section id="merch">
+  <div class="container">
+    <div class="merch-intro">
+      <div class="label reveal">05 — Merch</div>
+      <h2 class="section-title reveal d1">WEAR<br>THE VIBE</h2>
+      <p class="reveal d2">Limited edition pieces. Premium quality. Ships worldwide via Shopify × Printful.</p>
+    </div>
+
+    <div class="merch-grid">
+
+      <a href="shop.html" target="_blank" class="merch-card reveal">
+        <div class="merch-img"><img src="assets/merch-tshirt.png" alt="Cloud Chief Classic Tee"></div>
+        <div class="merch-info">
+          <span class="merch-badge">New Drop</span>
+          <div class="merch-name">Cloud Chief Classic Tee</div>
+          <div class="merch-price">€ 39.99</div>
+        </div>
+      </a>
+
+      <a href="shop.html" target="_blank" class="merch-card reveal d1">
+        <div class="merch-img" style="background:linear-gradient(135deg,#141414,#201408);align-items:center;justify-content:center;font-size:5rem;">👕</div>
+        <div class="merch-info">
+          <span class="merch-badge">Limited</span>
+          <div class="merch-name">CC Heavyweight Hoodie</div>
+          <div class="merch-price">€ 69.99</div>
+        </div>
+      </a>
+
+      <a href="shop.html" target="_blank" class="merch-card reveal d2">
+        <div class="merch-img" style="background:linear-gradient(135deg,#0a0a0a,#1a1208);align-items:center;justify-content:center;font-size:5rem;">🧢</div>
+        <div class="merch-info">
+          <div class="merch-name">Cloud Chief Dad Cap</div>
+          <div class="merch-price">€ 29.99</div>
+        </div>
+      </a>
+
+      <a href="shop.html" target="_blank" class="merch-card reveal d3">
+        <div class="merch-img"><img src="assets/slowburn-theory-cover.jpg" alt="Slow-Burn Theory Vinyl"></div>
+        <div class="merch-info">
+          <span class="merch-badge">Pre-Order</span>
+          <div class="merch-name">Slow-Burn Theory — Vinyl</div>
+          <div class="merch-price">€ 24.99</div>
+        </div>
+      </a>
+
+    </div>
+
+    <div class="merch-banner reveal">
+      <div>
+        <h3>FULL STORE<br>NOW OPEN</h3>
+        <p>Premium drops. Worldwide shipping. Powered by Printful × Shopify.</p>
+      </div>
+      <a href="shop.html" target="_blank" class="btn btn-primary">
+        Visit The Store →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================
+     PRESS / EPK
+====================================================== -->
+<section id="press">
+  <div class="container">
+    <div class="label reveal">06 — Press & EPK</div>
+    <h2 class="section-title reveal d1">FOR THE<br>PRESS</h2>
+
+    <!-- Bio + Video -->
+    <div class="press-grid">
+      <div class="press-bio reveal d1">
+        <h3>Electronic Press Kit</h3>
+        <p>Cloud Chief is the alias of Chayen Wittmer, a Dutch producer and sound builder from the Netherlands. He makes music from scratch, his own samples, keys, guitar, layered textures, and whatever the track asks for.</p>
+        <p>Since September 2025, AI has become part of his creative process, working alongside his own samples and musical instincts to build a new kind of sound. A hybrid approach where the human is still driving, just with some interesting tools on the passenger seat.</p>
+        <p>Live, Cloud Chief combines live instrumentation with a DJ set into something warm, groove-heavy and hard to leave early. Based in the Netherlands. Available for interviews, sync licensing and live bookings.</p>
+        <div class="press-contacts">
+          <div>
+            <strong>Management / Booking</strong>
+            <a href="mailto:info@wittmermedia.com">info@wittmermedia.com</a>
+          </div>
+          <div>
+            <strong>Sync / Licensing</strong>
+            <a href="mailto:info@wittmermedia.com">info@wittmermedia.com</a>
+          </div>
+          <div>
+            <strong>Press Inquiries</strong>
+            <a href="mailto:info@wittmermedia.com">info@wittmermedia.com</a>
+          </div>
+          <div>
+            <strong>Instagram <span style="background:var(--orange);color:#fff;font-size:.65rem;padding:1px 5px;border-radius:3px;letter-spacing:.05em;vertical-align:middle;">NEW</span></strong>
+            <a href="https://instagram.com/thecloudchief" target="_blank">@thecloudchief</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vertical video clip -->
+      <div class="reveal d2" style="display:flex;flex-direction:column;align-items:center;justify-content:flex-start;">
+        <div class="press-video-wrap">
+          <div class="press-video-frame">
+            <video
+              src="assets/cloud-chief-clip.mp4"
+              autoplay muted loop playsinline
+              preload="none"
+              poster="assets/slowburn-theory-cover.jpg">
+            </video>
+          </div>
+          <div class="press-video-label">Cloud Chief — A Short Film</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EPK Photo Gallery -->
+    <div class="epk-gallery">
+      <div class="epk-photo reveal"><img src="assets/epk-03.png" alt="Cloud Chief EPK Photo 3" onerror="this.parentElement.style.display='none'"></div>
+      <div class="epk-photo reveal d3"><img src="assets/epk-04.png" alt="Cloud Chief EPK Photo 4" onerror="this.parentElement.style.display='none'"></div>
+      <div class="epk-photo reveal"><img src="assets/epk-05.png" alt="Cloud Chief EPK Photo 5" onerror="this.parentElement.style.display='none'"></div>
+      <div class="epk-photo reveal d1"><img src="assets/epk-06.png" alt="Cloud Chief EPK Photo 6" onerror="this.parentElement.style.display='none'"></div>
+      <div class="epk-photo reveal d2"><img src="assets/epk-07.png" alt="Cloud Chief EPK Photo 7" onerror="this.parentElement.style.display='none'"></div>
+      <div class="epk-photo reveal d3"><img src="assets/epk-08.png" alt="Cloud Chief EPK Photo 8" onerror="this.parentElement.style.display='none'"></div>
+      <div class="epk-photo reveal"><img src="assets/epk-09.png" alt="Cloud Chief EPK Photo 9" onerror="this.parentElement.style.display='none'"></div>
+      <div class="epk-photo reveal d1"><img src="assets/epk-10.png" alt="Cloud Chief EPK Photo 10" onerror="this.parentElement.style.display='none'"></div>
+      <div class="epk-photo reveal d2"><img src="assets/epk-11.png" alt="Cloud Chief EPK Photo 11" onerror="this.parentElement.style.display='none'"></div>
+      <div class="epk-photo reveal d3"><img src="assets/epk-12.png" alt="Cloud Chief EPK Photo 12" onerror="this.parentElement.style.display='none'"></div>
+    </div>
+
+    <!-- Downloads -->
+    <div class="epk-downloads reveal" style="margin-top:2.5rem;">
+      <a href="assets/epk-portrait.png" download class="dl-item">
+        <span class="dl-icon">📷</span>
+        <div>
+          <div class="dl-title">Press Photo — High Res</div>
+          <div class="dl-sub">JPG · For editorial use</div>
+        </div>
+        <span class="dl-arrow">↓</span>
+      </a>
+      <a href="assets/slowburn-theory-cover.jpg" download class="dl-item">
+        <span class="dl-icon">🎵</span>
+        <div>
+          <div class="dl-title">Artwork — Slow-Burn Theory</div>
+          <div class="dl-sub">JPG · High resolution</div>
+        </div>
+        <span class="dl-arrow">↓</span>
+      </a>
+      <div class="dl-item" style="opacity:.55;cursor:default;">
+        <span class="dl-icon">📄</span>
+        <div>
+          <div class="dl-title">Full EPK — PDF</div>
+          <div class="dl-sub">Coming soon</div>
+        </div>
+        <span class="dl-arrow" style="color:var(--muted);">↓</span>
+      </div>
+      <div class="dl-item" style="opacity:.55;cursor:default;">
+        <span class="dl-icon">🎧</span>
+        <div>
+          <div class="dl-title">Promo Tracks (WAV)</div>
+          <div class="dl-sub">Available on request — email us</div>
+        </div>
+        <span class="dl-arrow" style="color:var(--muted);">→</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================
+     FOOTER
+====================================================== -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <h2>CLOUD<br><span style="color:var(--orange);">CHIEF</span></h2>
+        <p>Where blues meets boom bap. Where stories become grooves. Music that feels like it's always existed.</p>
+        <div class="socials">
+          <div class="soc-wrap">
+            <a href="https://instagram.com/thecloudchief" target="_blank" class="soc-btn" title="@thecloudchief — new profile">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+            <span class="soc-new">NEW</span>
+          </div>
+          <a href="https://open.spotify.com/artist/4BPXWb9bm3v2vtUimqhkec" target="_blank" class="soc-btn" title="Spotify">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+          </a>
+          <a href="https://www.youtube.com/@Cloud_Chief" target="_blank" class="soc-btn" title="YouTube">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+          <a href="https://tiktok.com/@cloudchief" target="_blank" class="soc-btn" title="TikTok">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.27 8.27 0 004.84 1.55V6.79a4.85 4.85 0 01-1.07-.1z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="foot-nav">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="#listen">Listen</a></li>
+          <li><a href="#playlist">Playlists</a></li>
+          <li><a href="#releases">Releases</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#merch">Merch</a></li>
+          <li><a href="#press">Press</a></li>
+        </ul>
+      </div>
+
+      <div class="foot-nav">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:info@wittmermedia.com">Booking</a></li>
+          <li><a href="mailto:info@wittmermedia.com">Management</a></li>
+          <li><a href="mailto:info@wittmermedia.com">Press</a></li>
+          <li><a href="mailto:info@wittmermedia.com">Sync / Licensing</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Cloud Chief / Wittmer Media. All rights reserved.</span>
+      <span>Made with groove.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Meta Pixel noscript -->
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID_HERE&ev=PageView&noscript=1"/></noscript>
+
+<script>
+  // ── INTRO ──────────────────────────────────────────────
+  // Use a fixed timeout — don't wait for 'load' (video blocks it)
+  setTimeout(() => {
+    const intro = document.getElementById('intro');
+    if (intro) {
+      intro.classList.add('gone');
+      setTimeout(() => intro.remove(), 1000);
+    }
+  }, 2600);
+
+  // ── NAV STICKY ─────────────────────────────────────────
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('sticky', window.scrollY > 60);
+  }, { passive: true });
+
+  // ── MOBILE MENU ────────────────────────────────────────
+  function openMenu()  { document.getElementById('mmenu').classList.add('open'); }
+  function closeMenu() { document.getElementById('mmenu').classList.remove('open'); }
+
+  // ── SCROLL REVEAL ──────────────────────────────────────
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        revealObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+  // ── META PIXEL EVENTS ──────────────────────────────────
+  function px(event, params) {
+    if (typeof fbq === 'function') fbq('track', event, params || {});
+  }
+  function pxCustom(event, params) {
+    if (typeof fbq === 'function') fbq('trackCustom', event, params || {});
+  }
+
+  document.querySelectorAll('.platform').forEach(el => {
+    el.addEventListener('click', () => pxCustom('StreamingClick', { platform: el.dataset.platform }));
+  });
+  document.querySelectorAll('.pl-card').forEach(el => {
+    el.addEventListener('click', () => pxCustom('PlaylistFollow'));
+  });
+  document.querySelectorAll('.merch-card, [href*="shopify"]').forEach(el => {
+    el.addEventListener('click', () => px('ViewContent', { content_type: 'product' }));
+  });
+</script>
+
+</body>
+</html>
