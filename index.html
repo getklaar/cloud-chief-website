@@ -1113,51 +1113,20 @@
       <p class="reveal d2">Limited edition pieces. Premium quality. Ships worldwide via Shopify × Printful.</p>
     </div>
 
-    <div class="merch-grid">
-
-      <a href="shop.html" target="_blank" class="merch-card reveal">
-        <div class="merch-img"><img src="assets/merch-tshirt.png" alt="Cloud Chief Classic Tee"></div>
-        <div class="merch-info">
-          <span class="merch-badge">New Drop</span>
-          <div class="merch-name">Cloud Chief Classic Tee</div>
-          <div class="merch-price">€ 39.99</div>
-        </div>
-      </a>
-
-      <a href="shop.html" target="_blank" class="merch-card reveal d1">
-        <div class="merch-img"><img src="assets/cloud-chief-art-1.png" alt="CC Heavyweight Hoodie"></div>
-        <div class="merch-info">
-          <span class="merch-badge">Limited</span>
-          <div class="merch-name">CC Heavyweight Hoodie</div>
-          <div class="merch-price">€ 69.99</div>
-        </div>
-      </a>
-
-      <a href="shop.html" target="_blank" class="merch-card reveal d2">
-        <div class="merch-img"><img src="assets/cloud-chief-art-2.png" alt="Cloud Chief Dad Cap"></div>
-        <div class="merch-info">
-          <div class="merch-name">Cloud Chief Dad Cap</div>
-          <div class="merch-price">€ 29.99</div>
-        </div>
-      </a>
-
-      <a href="shop.html" target="_blank" class="merch-card reveal d3">
-        <div class="merch-img"><img src="assets/slowburn-theory-cover.jpg" alt="Slow-Burn Theory Vinyl"></div>
-        <div class="merch-info">
-          <span class="merch-badge">Pre-Order</span>
-          <div class="merch-name">Slow-Burn Theory — Vinyl</div>
-          <div class="merch-price">€ 24.99</div>
-        </div>
-      </a>
-
+    <div class="merch-grid" id="merch-grid">
+      <!-- Skeleton loaders while Shopify data loads -->
+      <div class="merch-card merch-skeleton"></div>
+      <div class="merch-card merch-skeleton"></div>
+      <div class="merch-card merch-skeleton"></div>
+      <div class="merch-card merch-skeleton"></div>
     </div>
 
     <div class="merch-banner reveal">
       <div>
         <h3>FULL STORE<br>NOW OPEN</h3>
-        <p>Premium drops. Worldwide shipping. Powered by Printful × Shopify.</p>
+        <p>Premium drops. Worldwide shipping. Powered by Shopify.</p>
       </div>
-      <a href="shop.html" target="_blank" class="btn btn-primary">
+      <a href="https://cloudchiefstore.myshopify.com" target="_blank" class="btn btn-primary">
         Visit The Store →
       </a>
     </div>
@@ -1345,6 +1314,56 @@
   document.querySelectorAll('.merch-card, [href*="shopify"]').forEach(el => {
     el.addEventListener('click', () => px('ViewContent', { content_type: 'product' }));
   });
+</script>
+
+<!-- ── SHOPIFY LIVE PRODUCTS ─────────────────────────────────────── -->
+<style>
+  .merch-skeleton {
+    background: linear-gradient(90deg, #1a1a1a 25%, #222 50%, #1a1a1a 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.4s infinite;
+    pointer-events: none;
+    min-height: 320px;
+  }
+  @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+</style>
+<script>
+(function(){
+  const SHOP = 'cloudchiefstore.myshopify.com';
+  const STORE_URL = 'https://' + SHOP;
+  const delays = ['','d1','d2','d3'];
+
+  fetch(STORE_URL + '/products.json?limit=8')
+    .then(r => r.json())
+    .then(data => {
+      const products = data.products || [];
+      const grid = document.getElementById('merch-grid');
+      if (!products.length) { grid.innerHTML = ''; return; }
+
+      // Show first 4 in the grid
+      const show = products.slice(0, 4);
+      grid.innerHTML = show.map((p, i) => {
+        const img   = p.images && p.images[0] ? p.images[0].src : '';
+        const price = p.variants && p.variants[0] ? parseFloat(p.variants[0].price).toFixed(2).replace('.',',') : '';
+        const url   = STORE_URL + '/products/' + p.handle;
+        const d     = delays[i] || '';
+        // Strip "Cloud Chief - " prefix for cleaner display
+        const name  = p.title.replace(/^Cloud Chief[\s\-–]+/i, '');
+        return `<a href="${url}" target="_blank" class="merch-card reveal ${d}">
+          <div class="merch-img">${img ? `<img src="${img}" alt="${p.title}" loading="lazy">` : ''}</div>
+          <div class="merch-info">
+            <div class="merch-name">${name}</div>
+            <div class="merch-price">€ ${price}</div>
+          </div>
+        </a>`;
+      }).join('');
+    })
+    .catch(() => {
+      // On error just clear the skeletons silently
+      const grid = document.getElementById('merch-grid');
+      if (grid) grid.innerHTML = '<p style="color:var(--muted);text-align:center;padding:2rem;grid-column:1/-1;">Shop tijdelijk niet beschikbaar — <a href="https://cloudchiefstore.myshopify.com" style="color:var(--orange)">bezoek de store</a></p>';
+    });
+})();
 </script>
 
 <!-- ── LIGHTBOX ─────────────────────────────────────────────────────── -->
