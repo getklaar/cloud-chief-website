@@ -878,6 +878,39 @@
 </div>
 
 <!-- ======================================================
+     CONTACT — TOP
+====================================================== -->
+<section id="contact" style="background:#0c0c0c;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:4rem 0;">
+  <div class="container">
+    <div class="cc-contact-grid">
+      <div>
+        <p style="color:var(--orange);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;margin-bottom:.6rem;">Direct Line</p>
+        <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,4vw,3.4rem);letter-spacing:.04em;color:var(--white);line-height:1.05;margin-bottom:1rem;">ASK CLOUD CHIEF</h2>
+        <p style="color:var(--muted);font-size:.88rem;line-height:1.75;">Questions about the music, the store or anything else? Drop a message and I'll get back to you personally.</p>
+      </div>
+      <form class="cc-form" onsubmit="submitCCForm(event,this)">
+        <div class="cc-row">
+          <input type="text" name="name" placeholder="Your name" required>
+          <input type="email" name="email" placeholder="Your email" required>
+        </div>
+        <select name="topic" required>
+          <option value="" disabled selected>What's your question about?</option>
+          <option>Music / Cloud Chief</option>
+          <option>Webshop / Merch</option>
+          <option>Website</option>
+          <option>Booking / Collaboration</option>
+          <option>Press / Media</option>
+          <option>Something else</option>
+        </select>
+        <textarea name="message" placeholder="Your message..." rows="4" required></textarea>
+        <button type="submit">SEND MESSAGE</button>
+        <p class="cc-thanks">✓ Message sent — I'll get back to you soon.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================
      LISTEN
 ====================================================== -->
 <section id="listen">
@@ -1206,6 +1239,37 @@
 <!-- ======================================================
      FOOTER
 ====================================================== -->
+<!-- ======================================================
+     CONTACT — BOTTOM
+====================================================== -->
+<section style="background:var(--surface);border-top:1px solid var(--border);padding:5rem 0;">
+  <div class="container" style="max-width:680px;">
+    <div style="text-align:center;margin-bottom:2.5rem;">
+      <p style="color:var(--orange);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;margin-bottom:.6rem;">Get In Touch</p>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,4rem);letter-spacing:.04em;color:var(--white);line-height:1.05;">LEAVE A MESSAGE</h2>
+      <p style="color:var(--muted);margin-top:.8rem;line-height:1.75;font-size:.88rem;">Questions about Cloud Chief, the music, the webshop or anything else? Write it below and I'll get back to you personally.</p>
+    </div>
+    <form class="cc-form" onsubmit="submitCCForm(event,this)">
+      <div class="cc-row">
+        <input type="text" name="name" placeholder="Your name" required>
+        <input type="email" name="email" placeholder="Your email" required>
+      </div>
+      <select name="topic" required>
+        <option value="" disabled selected>What's your question about?</option>
+        <option>Music / Cloud Chief</option>
+        <option>Webshop / Merch</option>
+        <option>Website</option>
+        <option>Booking / Collaboration</option>
+        <option>Press / Media</option>
+        <option>Something else</option>
+      </select>
+      <textarea name="message" placeholder="Your message..." rows="5" required></textarea>
+      <button type="submit">SEND MESSAGE</button>
+      <p class="cc-thanks">✓ Message sent — I'll get back to you soon.</p>
+    </form>
+  </div>
+</section>
+
 <footer>
   <div class="container">
     <div class="footer-top">
@@ -1240,6 +1304,7 @@
           <li><a href="#about">About</a></li>
           <li><a href="#merch">Merch</a></li>
           <li><a href="#press">Press</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
 
@@ -1401,8 +1466,109 @@
 <style>
   .epk-photo { transition: opacity .2s, transform .2s; }
   .epk-photo:hover { opacity:.82; transform:scale(1.02); }
+
+  /* ── CONTACT FORMS ──────────────────────────────────────── */
+  .cc-contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 3.5rem;
+    align-items: start;
+  }
+  @media (max-width: 768px) {
+    .cc-contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+  }
+  .cc-form input,
+  .cc-form select,
+  .cc-form textarea {
+    width: 100%;
+    background: #0a0a0a;
+    border: 1px solid var(--border);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    font-size: .88rem;
+    padding: .85rem 1rem;
+    border-radius: 3px;
+    outline: none;
+    transition: border-color .2s;
+    margin-bottom: .9rem;
+    -webkit-appearance: none;
+    appearance: none;
+    box-sizing: border-box;
+  }
+  .cc-form input:focus,
+  .cc-form select:focus,
+  .cc-form textarea:focus { border-color: var(--orange); }
+  .cc-form input::placeholder,
+  .cc-form textarea::placeholder { color: var(--muted); }
+  .cc-form select { color: var(--muted); cursor: pointer; }
+  .cc-form select option { background: #111; color: var(--white); }
+  .cc-form textarea { resize: vertical; min-height: 110px; }
+  .cc-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .9rem;
+  }
+  @media (max-width: 500px) { .cc-row { grid-template-columns: 1fr; } }
+  .cc-form button[type="submit"] {
+    width: 100%;
+    background: var(--orange);
+    color: #fff;
+    border: none;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.05rem;
+    letter-spacing: .12em;
+    padding: .95rem 2rem;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: opacity .2s;
+  }
+  .cc-form button[type="submit"]:hover { opacity: .85; }
+  .cc-form button[type="submit"]:disabled { opacity: .5; cursor: not-allowed; }
+  .cc-thanks {
+    display: none;
+    color: var(--orange);
+    font-size: .82rem;
+    letter-spacing: .06em;
+    text-align: center;
+    margin-top: .8rem;
+    text-transform: uppercase;
+  }
 </style>
 <script>
+  // ── CONTACT FORM ────────────────────────────────────────
+  function submitCCForm(e, form) {
+    e.preventDefault();
+    var btn = form.querySelector('button[type="submit"]');
+    btn.textContent = 'SENDING...';
+    btn.disabled = true;
+    fetch('https://formsubmit.co/ajax/info@wittmermedia.com', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        name: form.name.value,
+        email: form.email.value,
+        topic: form.topic.value,
+        message: form.message.value,
+        _subject: 'Bericht via cloudchiefworld.com',
+        _captcha: 'false'
+      })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function() {
+      form.reset();
+      btn.textContent = 'SEND MESSAGE';
+      btn.disabled = false;
+      var t = form.querySelector('.cc-thanks');
+      t.style.display = 'block';
+      setTimeout(function() { t.style.display = 'none'; }, 6000);
+    })
+    .catch(function() {
+      btn.textContent = 'SEND MESSAGE';
+      btn.disabled = false;
+      alert('Something went wrong. Please email info@wittmermedia.com directly.');
+    });
+  }
+
   (function() {
     function lbOpen(src) {
       var lb = document.getElementById('lightbox');
